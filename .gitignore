@@ -1,0 +1,34 @@
+# Settings Eclipse
+.classpath
+.project
+.checkstyle
+.ispace
+.settings
+.extgernalToolBuilders
+.metadata
+Settings
+
+*.factorypath
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Dossiers generation
+/bin/
+bin
+classes
+target
