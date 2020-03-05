@@ -1,7 +1,10 @@
 package application;
 
+import java.net.MalformedURLException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 import interfaces.Information;
 import javafx.application.Application;
@@ -13,9 +16,17 @@ import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application{
+	
+	/**
+	 * Main
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
 	@Override
 	public void start(Stage windows) {
-//	public static void main( String[] args) {
 		try {
 
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/principal.fxml"));
@@ -25,20 +36,28 @@ public class Main extends Application{
 						
 						windows.setScene(scene);
 						windows.show();
-			System.out.println("Lancement du client");
+			/*System.out.println("Lancement du client");
 
 			Remote r = Naming.lookup("rmi://192.168.43.133/test");
 			System.out.println(r);
 			String bonjor = ((Information) r).getInfo();
-			System.out.println("resultat de la methode : "+bonjor);
+			System.out.println("resultat de la methode : "+bonjor);*/
 
 
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-
-	public static void main(String[] args) {
-		launch(args);
+	
+	public void connexion(String ip, String port) throws RemoteException {
+		Remote r = null;
+		try {
+			r = Naming.lookup("rmi://"+ip+"/test");
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String bonjor = ((Information) r).getInfo();
 	}
+
 }
