@@ -1,4 +1,4 @@
-package lancement;
+package test;
 
 import java.rmi.RemoteException;
 import java.sql.Connection;
@@ -48,40 +48,40 @@ public class TestJDBC {
 		 * @return LA LISTE DE PRODUIT D'UN PANIER
 		 * VALIDE
 		 */
-		listeP = pDao.read(panier);
-		for (Produit p : listeP)
-		{
-			System.out.println(p.toString());
-		} 
+//		listeP = pDao.read(panier);
+//		for (Produit p : listeP)
+//		{
+//			System.out.println(p.toString());
+//		} 
 		
-//		/**
-//		 * METHODE QUI AJOUTE UN PRODUIT A UN PANIER
-//		 * @return BOOLEAN
-//		 * VALIDE
-//		 */
+		/**
+		 * METHODE QUI AJOUTE UN PRODUIT A UN PANIER
+		 * @return BOOLEAN
+		 * VALIDE
+		 */
 //		produit.setId(2);
 //		pDao.create(panier, produit);
 		
-//		/**
-//		 * METHODE QUI SUPPRIME UN PRODUIT A UN PANIER
-//		 * @return BOOLEAN
-//		 * VALIDE
-//		 */
+		/**
+		 * METHODE QUI SUPPRIME UN PRODUIT A UN PANIER
+		 * @return BOOLEAN
+		 * VALIDE
+		 */
 //		produit.setId(2);
 //		pDao.delete(panier, produit);
 		
-//		/**
-//		 * METHODE QUI CALCUL LE MONTANT D'UN PANIER
-//		 * @return LE MONTANT
-//		 * VALIDE
-//		 */
-		double montant = pDao.montantPanier(listeP);
-		System.out.println("le montant du panier est : "+montant);
+		/**
+		 * METHODE QUI CALCUL LE MONTANT D'UN PANIER
+		 * @return LE MONTANT
+		 * VALIDE
+		 */
+//		double montant = pDao.montantPanier(listeP);
+//		System.out.println("le montant du panier est : "+montant);
 		
 		/**
 		 * METHODE QUI VERIFIE SI UN CLIENT EST SOLVABLE
 		 * @return BOOLEAN
 		 */
-		banque.verifierSolvabilite("ETI123ETI", montant);
+//		banque.verifierSolvabilite("ETI123ETI", montant);
 	}
 }

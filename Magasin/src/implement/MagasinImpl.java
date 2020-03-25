@@ -8,9 +8,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import dao.PanierDao;
 import include.MysqlDbConnection;
 import interfaces.IMagasin;
 import modele.Client;
+import modele.Panier;
 import modele.Produit;
 
 public class MagasinImpl extends UnicastRemoteObject implements IMagasin{
@@ -53,10 +55,12 @@ public class MagasinImpl extends UnicastRemoteObject implements IMagasin{
 	/**
 	 * Methode qui ajoute un produit dans un panier
 	 * @return : panier
+	 * @throws SQLException 
 	 */
 	@Override
-	public String ajouterProduitPanier() throws RemoteException {
-		
+	public String ajouterProduitPanier(Panier panier, Produit produit) throws RemoteException, SQLException {
+		PanierDao panierDao = new PanierDao();
+		panierDao.create(panier, produit);
 		// TODO Auto-generated method stub
 		return null;
 	}

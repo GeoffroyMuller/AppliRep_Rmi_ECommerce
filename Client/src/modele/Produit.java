@@ -26,7 +26,6 @@ public class Produit implements Serializable{
 		
 	}
 	
-
 	public Produit(int id, String nom, int stock, double prixUnit, int qteUnit, int taille, double poids,
 			String couleur, int produitDispo, double remise, String description, int note) {
 		super();

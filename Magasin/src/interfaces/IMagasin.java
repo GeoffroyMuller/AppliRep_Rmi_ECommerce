@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import modele.Client;
+import modele.Panier;
 import modele.Produit;
 
 public interface IMagasin extends Remote{
@@ -16,8 +17,6 @@ public interface IMagasin extends Remote{
 	
 	public ArrayList<Produit> getProduits() throws RemoteException, SQLException;
 	
-	public String ajouterProduitPanier() throws RemoteException;
-	
 	public String supprimerProduitPanier() throws RemoteException;
 	
 	public String majQteProduitPanier() throws RemoteException;
@@ -25,6 +24,8 @@ public interface IMagasin extends Remote{
 	public String validerUnPanier() throws RemoteException;
 	
 	public String validerUneCommande() throws RemoteException;
+
+	String ajouterProduitPanier(Panier panier, Produit produit) throws RemoteException, SQLException;
 	
 	
 }
