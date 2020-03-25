@@ -16,7 +16,7 @@ import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application{
-	
+
 	/**
 	 * Main
 	 * @param args
@@ -24,40 +24,21 @@ public class Main extends Application{
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
+
 	@Override
 	public void start(Stage windows) {
 		try {
 
-						FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/principal.fxml"));
-						Parent root = loader.load();
-						Scene scene = new Scene(root,1000,600);
-						scene.getStylesheets().add(getClass().getResource("/vue/style/principal.css").toExternalForm());
-						
-						windows.setScene(scene);
-						windows.show();
-			/*System.out.println("Lancement du client");
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/principal.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root,1000,600);
+			scene.getStylesheets().add(getClass().getResource("/vue/style/principal.css").toExternalForm());
 
-			Remote r = Naming.lookup("rmi://192.168.43.133/test");
-			System.out.println(r);
-			String bonjor = ((Information) r).getInfo();
-			System.out.println("resultat de la methode : "+bonjor);*/
-
-
+			windows.setScene(scene);
+			windows.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public void connexion(String ip, String port) throws RemoteException {
-		Remote r = null;
-		try {
-			r = Naming.lookup("rmi://"+ip+"/test");
-		} catch (MalformedURLException | RemoteException | NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String bonjor = ((Information) r).getInfo();
 	}
 
 }
