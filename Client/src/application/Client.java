@@ -3,8 +3,6 @@ package application;
 import java.rmi.Naming;
 import java.rmi.Remote;
 
-import interfaces.Information;
-
 /**
  * Client Singleton
  * @author Geoff-Portable
@@ -34,11 +32,6 @@ public class Client {
 		try {
 			Remote r = Naming.lookup("rmi://"+ip+":"+port+"/TestRMI");
 			System.out.println(r);
-			if (r instanceof Information)
-			{
-				String s = ((Information) r).getInfo();
-				System.out.println("chaine renvoyee = "+s);
-			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

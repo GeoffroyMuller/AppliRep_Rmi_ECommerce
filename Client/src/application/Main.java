@@ -6,7 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import interfaces.Information;
+import interfaces.IMagasin;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -28,6 +28,7 @@ public class Main extends Application{
 	@Override
 	public void start(Stage windows) {
 		try {
+			System.out.println("Lancement du client");
 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/principal.fxml"));
 			Parent root = loader.load();
@@ -40,5 +41,4 @@ public class Main extends Application{
 			e.printStackTrace();
 		}
 	}
-
 }

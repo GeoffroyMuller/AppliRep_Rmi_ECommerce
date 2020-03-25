@@ -7,34 +7,24 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
-import implement.InfoImpl;
+import implement.MagasinImpl;
 import include.MysqlDbConnection;
+import modele.Produit;
 
 public class Main {
 
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
-		Connection c = MysqlDbConnection.getConnection();
-		Statement stmt = null;
-		String sql;
-		sql = "Select * from client";
-		stmt = c.createStatement();
-		ResultSet rs = stmt.executeQuery(sql);
-		while (rs.next())
-		{
-			int id = rs.getInt("id");
-			System.out.println("l'id de mon client est : "+id);
-		}
-		rs.close();
-		stmt.close();
-		c.close();
+		
+//		
 		System.out.println("yo");
 		try {
 			LocateRegistry.createRegistry(1099);
 			System.out.println("Hello world");
 			
-			InfoImpl info = new InfoImpl();
+			MagasinImpl info = new MagasinImpl();
 			String url = "rmi://"+InetAddress.getLocalHost().getHostAddress()+"/test";
 			System.out.println("Enregistrement de l'objet avec l'url : "+url);
 			Naming.rebind(url, info);
