@@ -59,7 +59,7 @@ public class Main extends Application{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String bonjor = ((Information) r).getInfo();
+		String bonjor = ((IMagasin) r).getInfo();
 	}
 
 }

@@ -7,16 +7,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import dao.PanierDao;
 import implement.MagasinImpl;
 import include.MysqlDbConnection;
 import modele.Client;
+import modele.Panier;
 import modele.Produit;
 
 public class TestJDBC {
 	public static void main(String[] args) throws SQLException, RemoteException {
 		ArrayList<Produit> listeP = new ArrayList<Produit>();
 		MagasinImpl m = new MagasinImpl();
-		
+		Panier panier = new Panier(2);
+		PanierDao pDao = new PanierDao();
 		/**
 		 * METHODE DE CONNEXION 
 		 * @return : UN CLIENT
@@ -35,7 +38,17 @@ public class TestJDBC {
 //		for (Produit p : listeP)
 //		{
 //			System.out.println(p.toString());
-//		}
+//		} 
+		
+		/**
+		 * @return LA LISTE DE PRODUIT D'UN PANIER
+		 * VALIDE
+		 */
+		listeP = pDao.read(panier);
+		for (Produit p : listeP)
+		{
+			System.out.println(p.toString());
+		} 
 		
 			//		listeP = MagasinImpl.get
 //		Connection c = MysqlDbConnection.getConnection();

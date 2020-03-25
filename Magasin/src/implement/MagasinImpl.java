@@ -50,8 +50,13 @@ public class MagasinImpl extends UnicastRemoteObject implements IMagasin{
 		
 	}
 
+	/**
+	 * Methode qui ajoute un produit dans un panier
+	 * @return : panier
+	 */
 	@Override
 	public String ajouterProduitPanier() throws RemoteException {
+		
 		// TODO Auto-generated method stub
 		return null;
 	}
