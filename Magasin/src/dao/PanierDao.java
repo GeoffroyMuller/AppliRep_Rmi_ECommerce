@@ -14,23 +14,34 @@ import modele.Panier;
 import modele.Produit;
 
 public class PanierDao {
-	public void create(Panier panier, Produit produit) {
-		// TODO Auto-generated method stub
-
+	public boolean create(Panier panier, Produit produit) throws SQLException {
+		Connection c = MysqlDbConnection.getConnection();
+		Statement stmt = null;
+		String sql = "insert into constituer (`idPanier`, `idProduit`) values ("+panier.getIdPanier()+", "+produit.getId()+")";
+		stmt = c.createStatement();
+		int rs = stmt.executeUpdate(sql);	
+		stmt.close();
+		c.close();
+		return true;
 	}
 
 	public void update(Panier panier) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
-	public void delete(Panier panier) {
-		// TODO Auto-generated method stub
-
+	public boolean delete(Panier panier, Produit produit) throws SQLException {
+		Connection c = MysqlDbConnection.getConnection();
+		Statement stmt = null;
+		String sql = "delete from constituer where constituer.idPanier = "+panier.getIdPanier()+" and constituer.idProduit = "+produit.getId();
+		stmt = c.createStatement();
+		int rs = stmt.executeUpdate(sql);	
+		stmt.close();
+		c.close();
+		System.out.println("OK");
+		return true;
 	}
 
 	public ArrayList<Produit> read(Panier panier) throws SQLException {
-		// TODO Auto-generated method stub
 		List<Integer> listeProduitsPanier = new ArrayList<Integer>();
 		List<Produit> listeProduits = new ArrayList<Produit>();
 		Connection c = MysqlDbConnection.getConnection();
@@ -62,5 +73,15 @@ public class PanierDao {
 		stmt.close();
 		c.close();
 		return (ArrayList<Produit>) listeProduits;
+	}
+	
+	public double montantPanier(ArrayList<Produit> listeProduits)
+	{
+		double montant = 0;
+		for (Produit produit : listeProduits)
+		{
+			montant += produit.getPrixUnit();
+		}
+		return montant;
 	}
 }

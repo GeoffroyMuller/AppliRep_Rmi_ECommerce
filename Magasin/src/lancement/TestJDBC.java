@@ -18,8 +18,9 @@ public class TestJDBC {
 	public static void main(String[] args) throws SQLException, RemoteException {
 		ArrayList<Produit> listeP = new ArrayList<Produit>();
 		MagasinImpl m = new MagasinImpl();
-		Panier panier = new Panier(2);
+		Panier panier = new Panier(1);
 		PanierDao pDao = new PanierDao();
+		Produit produit = new Produit();
 		/**
 		 * METHODE DE CONNEXION 
 		 * @return : UN CLIENT
@@ -50,20 +51,30 @@ public class TestJDBC {
 			System.out.println(p.toString());
 		} 
 		
-			//		listeP = MagasinImpl.get
-//		Connection c = MysqlDbConnection.getConnection();
-//		Statement stmt = null;
-//		String sql;
-//		sql = "Select * from client";
-//		stmt = c.createStatement();
-//		ResultSet rs = stmt.executeQuery(sql);
-//		while (rs.next())
-//		{
-//			int id = rs.getInt("id");
-//			System.out.println("l'id de mon client est : "+id);
-//		}
-//		rs.close();
-//		stmt.close();
-//		c.close();
+//		/**
+//		 * METHODE QUI AJOUTE UN PRODUIT A UN PANIER
+//		 * @return BOOLEAN
+//		 * VALIDE
+//		 */
+//		produit.setId(2);
+//		pDao.create(panier, produit);
+		
+//		/**
+//		 * METHODE QUI SUPPRIME UN PRODUIT A UN PANIER
+//		 * @return BOOLEAN
+//		 * VALIDE
+//		 */
+//		produit.setId(2);
+//		pDao.delete(panier, produit);
+		
+//		/**
+//		 * METHODE QUI CALCUL LE MONTANT D'UN PANIER
+//		 * @return LE MONTANT
+//		 * VALIDE
+//		 */
+//		double montant = pDao.montantPanier(listeP);
+//		System.out.println("le montant du panier est : "+montant);
+		
+
 	}
 }
