@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import dao.PanierDao;
+import implement.BanqueImpl;
 import implement.MagasinImpl;
 import include.MysqlDbConnection;
 import modele.Client;
@@ -21,6 +22,8 @@ public class TestJDBC {
 		Panier panier = new Panier(1);
 		PanierDao pDao = new PanierDao();
 		Produit produit = new Produit();
+		BanqueImpl banque = new BanqueImpl();
+		
 		/**
 		 * METHODE DE CONNEXION 
 		 * @return : UN CLIENT
@@ -72,9 +75,13 @@ public class TestJDBC {
 //		 * @return LE MONTANT
 //		 * VALIDE
 //		 */
-//		double montant = pDao.montantPanier(listeP);
-//		System.out.println("le montant du panier est : "+montant);
+		double montant = pDao.montantPanier(listeP);
+		System.out.println("le montant du panier est : "+montant);
 		
-
+		/**
+		 * METHODE QUI VERIFIE SI UN CLIENT EST SOLVABLE
+		 * @return BOOLEAN
+		 */
+		banque.verifierSolvabilite("ETI123ETI", montant);
 	}
 }
