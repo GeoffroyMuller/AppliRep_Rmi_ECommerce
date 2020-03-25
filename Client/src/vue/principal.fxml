@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="612.0" prefWidth="1177.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="612.0" prefWidth="1177.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.Controleur">
    <top>
       <Pane prefHeight="43.0" prefWidth="1190.0" style="-fx-background-color: #CDCDCD;" BorderPane.alignment="CENTER">
          <children>
