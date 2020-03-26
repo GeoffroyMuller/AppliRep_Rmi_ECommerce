@@ -1,14 +1,12 @@
 package application;
 
+import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.Remote;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import interfaces.IClient;
 import interfaces.IMagasin;
-import interfaces.IPanier;
 import interfaces.IProduit;
 
 /**
@@ -18,6 +16,8 @@ import interfaces.IProduit;
 public class Client {
 
 	private static Client client;
+	
+	private static ArrayList<IMagasin> listeMagasins;
 
 	/**
 	 * Renvoie l'instance de client 
@@ -34,17 +34,25 @@ public class Client {
 	 * Permet de connecter le client
 	 * @param ip du serveur
 	 * @param port du serveur
+	 * @throws NotBoundException 
+	 * @throws RemoteException 
+	 * @throws MalformedURLException 
 	 */
-	public static void connection(String ip, String port) {
-		System.out.println( "Lancement du client!" );
-		try {
-			Remote r = Naming.lookup("rmi://"+ip+":"+port+"/TestRMI");
-			System.out.println(r);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		System.out.println("Fin du client");
+	public static void connection(String ip, String port) 
+			throws MalformedURLException, RemoteException, NotBoundException {
+		IMagasin obj;
+		obj = (IMagasin)Naming.lookup("rmi://"+ip+":"+port+"/magasin");
+		listeMagasins = new ArrayList<IMagasin>();
+		listeMagasins.add(obj);
+	}
+	
+	public static IMagasin dernierMagasin() {
+		ArrayList<IMagasin> listeMagasins = getListeMagasins();
+		return listeMagasins.get(listeMagasins.size()-1);
+	}
+
+	public static ArrayList<IMagasin> getListeMagasins() {
+		return listeMagasins;
 	}
 	
 //	/**
