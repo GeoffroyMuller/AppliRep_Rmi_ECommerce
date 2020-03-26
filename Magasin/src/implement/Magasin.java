@@ -13,6 +13,7 @@ import interfaces.IProduit;
 public class Magasin extends UnicastRemoteObject implements IMagasin{
 	
 	ArrayList<Produit> listeProduit = new ArrayList<Produit>();
+	
 	MagasinDao magasinDao = new MagasinDao();
 	
 	public Magasin() throws RemoteException, SQLException

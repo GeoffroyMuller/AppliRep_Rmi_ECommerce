@@ -38,6 +38,7 @@ public class Main extends Application{
 			windows.setScene(scene);
 			windows.show();
 //			Client.testGetListe();
+//			Client.testClient();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -10,9 +10,6 @@ import interfaces.IPanier;
 
 public class Panier extends UnicastRemoteObject implements IPanier {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private int idPanier;
@@ -30,18 +27,18 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 	public Panier(int idPanier) throws RemoteException, SQLException
 	{
 		this.idPanier = idPanier;
-		this.listeDeProduit = panierDao.recupererLesProduits(this);
-		this.montantPanier = this.calculerMontantPanier(listeDeProduit);
+		this.listeDeProduit = panierDao.recupererLesProduits(this.getIdPanier());
+		this.montantPanier = this.calculerMontantPanier();
 	}	
 	
-	public Panier ajouterProduit(Panier panier, Produit produit) throws RemoteException, SQLException
+	public void ajouterProduit(int idPanier, int idProduit) throws RemoteException, SQLException
 	{
-		return panierDao.ajouterProduit(panier, produit);
+		panierDao.ajouterProduit(idPanier, idProduit);
 	}
 	
-	public Panier retirerProduit(Panier panier, Produit produit) throws RemoteException, SQLException
+	public void retirerProduit(int idPanier, int idProduit) throws RemoteException, SQLException
 	{
-		return panierDao.retirerProduit(panier, produit);
+		panierDao.retirerProduit(idPanier, idProduit);
 	}
 	
 	public Panier ajouterUnProduitListe(Panier panier, Produit produit) 
@@ -58,9 +55,14 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 		return this;
 	}
 	
-	public double calculerMontantPanier(ArrayList<Produit> listeProduits) throws RemoteException
+	public double calculerMontantPanier() throws RemoteException
 	{
-		return panierDao.montantPanier(listeProduits);
+		double montantPanier = 0;
+		for(Produit produit : this.listeDeProduit)
+		{
+			montantPanier += produit.getPrixUnit();
+		}
+		return montantPanier;
 	}
 
 	public int getIdPanier() throws RemoteException {

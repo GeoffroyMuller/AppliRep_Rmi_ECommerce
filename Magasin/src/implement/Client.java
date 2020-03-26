@@ -9,6 +9,8 @@ import interfaces.IClient;
 
 public class Client extends UnicastRemoteObject implements IClient{
 
+	private static final long serialVersionUID = 1L;
+	
 	int id;
 	String nom;
 	String prenom;
@@ -39,20 +41,25 @@ public class Client extends UnicastRemoteObject implements IClient{
 		this.mdp = mdp;
 	}
 	
+	public Client connexionClient() throws RemoteException, SQLException
+	{
+		return clientDao.connexionClient(mail, mdp);
+	}
+	
 	public Client connexionClient(String mail, String mdp) throws RemoteException, SQLException
 	{
 		return clientDao.connexionClient(mail, mdp);
 	}
 	
-	public Panier recuperePanier(Client client) throws RemoteException, SQLException
+	public Panier recuperePanier(int idClient) throws RemoteException, SQLException
 	{
-		return clientDao.recupererPanier(client);
+		return clientDao.recupererPanier(idClient);
 	}
 	
-	public int getId() {
+	public int getId() throws RemoteException {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(int id) throws RemoteException {
 		this.id = id;
 	}
 	public String getNom() {

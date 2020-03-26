@@ -9,8 +9,12 @@ import implement.Panier;
 
 public interface IClient extends Remote{
 
-	public Client connexionClient(String mail, String mdp) throws RemoteException, SQLException;
+	public IClient connexionClient(String mail, String mdp) throws RemoteException, SQLException;
 	
-	public Panier recuperePanier(Client client) throws RemoteException, SQLException;
+	public IPanier recuperePanier(int idPanier) throws RemoteException, SQLException;
+	
+	public int getId() throws RemoteException;
+	
+	public void setId(int idClient) throws RemoteException;
 	
 }

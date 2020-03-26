@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import dao.ClientDao;
 import dao.MagasinDao;
 import dao.PanierDao;
 import implement.Client;
@@ -22,6 +23,11 @@ public class TestJDBC {
 		PanierDao pDao = new PanierDao();
 		Produit produit = new Produit();
 		MagasinDao magasinDao = new MagasinDao();
+		ClientDao clientdao = new ClientDao();
+		
+		Panier p = clientdao.recupererPanier(2);
+		
+		System.out.println(p.getIdPanier());
 		/**
 		 * METHODE DE CONNEXION 
 		 * @return : UN CLIENT

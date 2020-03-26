@@ -15,41 +15,37 @@ import implement.Produit;
 import include.MysqlDbConnection;
 
 public class PanierDao {
-	public Panier ajouterProduit(Panier panier, Produit produit) throws SQLException, RemoteException {
-		panier.ajouterUnProduitListe(panier, produit);
+	public void ajouterProduit(int idPanier, int idProduit) throws SQLException, RemoteException {
 		Connection c = MysqlDbConnection.getConnection();
 		Statement stmt = null;
-		String sql = "insert into constituer (`idPanier`, `idProduit`) values ("+panier.getIdPanier()+", "+produit.getId()+")";
+		String sql = "insert into constituer (`idPanier`, `idProduit`) values ("+idPanier+", "+idProduit+")";
 		stmt = c.createStatement();
 		int rs = stmt.executeUpdate(sql);	
 		stmt.close();
 		c.close();
-		return panier;
 	}
 
 	public void update(Panier panier) {
 		
 	}
 
-	public Panier retirerProduit(Panier panier, Produit produit) throws SQLException, RemoteException {
-		panier.retirerUnProduitListe(panier, produit);
+	public void retirerProduit(int idPanier, int idProduit) throws SQLException, RemoteException {
 		Connection c = MysqlDbConnection.getConnection();
 		Statement stmt = null;
-		String sql = "delete from constituer where constituer.idPanier = "+panier.getIdPanier()+" and constituer.idProduit = "+produit.getId();
+		String sql = "delete from constituer where constituer.idPanier = "+idPanier+" and constituer.idProduit = "+idProduit;
 		stmt = c.createStatement();
 		int rs = stmt.executeUpdate(sql);	
 		stmt.close();
 		c.close();
 		System.out.println("OK");
-		return panier;
 	}
 
-	public ArrayList<Produit> recupererLesProduits(Panier panier) throws SQLException, RemoteException {
+	public ArrayList<Produit> recupererLesProduits(int idPanier) throws SQLException, RemoteException {
 		List<Integer> listeProduitsPanier = new ArrayList<Integer>();
 		List<Produit> listeProduits = new ArrayList<Produit>();
 		Connection c = MysqlDbConnection.getConnection();
 		Statement stmt = null;
-		String sql = "Select idProduit from constituer where idPanier = "+panier.getIdPanier();
+		String sql = "Select idProduit from constituer where idPanier = "+idPanier;
 		stmt = c.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next())
@@ -78,13 +74,4 @@ public class PanierDao {
 		return (ArrayList<Produit>) listeProduits;
 	}
 	
-	public double montantPanier(ArrayList<Produit> listeProduits) throws RemoteException
-	{
-		double montant = 0;
-		for (Produit produit : listeProduits)
-		{
-			montant += produit.getPrixUnit();
-		}
-		return montant;
-	}
 }

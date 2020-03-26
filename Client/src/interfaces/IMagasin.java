@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 public interface IMagasin extends Remote{
 	
-public String getInfo() throws RemoteException;
-	
 	public ArrayList<IProduit> getListeProduit() throws RemoteException;
 	
 }

@@ -8,11 +8,14 @@ import java.util.ArrayList;
 
 public interface IPanier extends Remote {
 	
-	public IPanier ajouterProduit(IPanier panier, IProduit produit) throws RemoteException, SQLException;
+	public IPanier ajouterProduit(int idPanier, int idProduit) throws RemoteException, SQLException;
 	
-	public IPanier retirerProduit(IPanier panier, IProduit produit) throws RemoteException, SQLException;
+	public IPanier retirerProduit(int idPanier, int idProduit) throws RemoteException, SQLException;
 	
-	public double calculerMontantIPanier(ArrayList<IProduit> listeProduits) throws RemoteException;
+	public double calculerMontantPanier() throws RemoteException;
 
 	public ArrayList<IProduit> getListeDeProduit() throws RemoteException;
+	
+	public int getIdPanier() throws RemoteException;
+	
 }
