@@ -1,6 +1,13 @@
-package modele;
+package implement;
 
-public class Client {
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
+
+import dao.ClientDao;
+import interfaces.IClient;
+
+public class Client extends UnicastRemoteObject implements IClient{
 
 	int id;
 	String nom;
@@ -12,12 +19,14 @@ public class Client {
 	String mail;
 	String mdp;
 	
-	public Client()
+	ClientDao clientDao = new ClientDao();
+	
+	public Client() throws RemoteException
 	{
 		
 	}
 	
-	public Client(int id, String nom, String prenom, String rue, int cp, int numRue, int age, String mail, String mdp)
+	public Client(int id, String nom, String prenom, String rue, int cp, int numRue, int age, String mail, String mdp) throws RemoteException
 	{
 		this.id = id;
 		this.nom = nom;
@@ -28,6 +37,16 @@ public class Client {
 		this.age = age;
 		this.mail = mail;
 		this.mdp = mdp;
+	}
+	
+	public Client connexionClient(String mail, String mdp) throws RemoteException, SQLException
+	{
+		return clientDao.connexionClient(mail, mdp);
+	}
+	
+	public Panier recuperePanier(Client client) throws RemoteException, SQLException
+	{
+		return clientDao.recupererPanier(client);
 	}
 	
 	public int getId() {

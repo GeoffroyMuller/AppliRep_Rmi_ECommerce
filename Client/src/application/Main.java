@@ -11,7 +11,6 @@ import interfaces.IMagasin;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import modele.Produit;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -38,6 +37,7 @@ public class Main extends Application{
 
 			windows.setScene(scene);
 			windows.show();
+//			Client.testGetListe();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

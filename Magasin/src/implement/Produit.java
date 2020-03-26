@@ -1,13 +1,23 @@
-package modele;
+package implement;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class Produit implements Serializable{
+import dao.ProduitDao;
+import interfaces.IProduit;
+
+public class Produit extends UnicastRemoteObject implements IProduit{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
 	int id;
 	String nom;
 	int stock;
@@ -21,14 +31,13 @@ public class Produit implements Serializable{
 	String description;
 	int note;
 	
-	public Produit()
+	public Produit() throws RemoteException
 	{
 		
 	}
-	
 
 	public Produit(int id, String nom, int stock, double prixUnit, int qteUnit, int taille, double poids,
-			String couleur, int produitDispo, double remise, String description, int note) {
+			String couleur, int produitDispo, double remise, String description, int note) throws RemoteException {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -51,7 +60,7 @@ public class Produit implements Serializable{
 	}
 	
 
-	public int getId() {
+	public int getId() throws RemoteException{
 		return id;
 	}
 
@@ -59,7 +68,7 @@ public class Produit implements Serializable{
 		this.id = id;
 	}
 
-	public String getNom() {
+	public String getNom() throws RemoteException{
 		return nom;
 	}
 
@@ -67,7 +76,7 @@ public class Produit implements Serializable{
 		this.nom = nom;
 	}
 
-	public int getStock() {
+	public int getStock() throws RemoteException{
 		return stock;
 	}
 
@@ -75,7 +84,7 @@ public class Produit implements Serializable{
 		this.stock = stock;
 	}
 
-	public double getPrixUnit() {
+	public double getPrixUnit() throws RemoteException{
 		return prixUnit;
 	}
 
@@ -83,7 +92,7 @@ public class Produit implements Serializable{
 		this.prixUnit = prixUnit;
 	}
 
-	public int getQteUnit() {
+	public int getQteUnit() throws RemoteException{
 		return qteUnit;
 	}
 
@@ -91,7 +100,7 @@ public class Produit implements Serializable{
 		this.qteUnit = qteUnit;
 	}
 
-	public int getTaille() {
+	public int getTaille() throws RemoteException{
 		return taille;
 	}
 
@@ -99,7 +108,7 @@ public class Produit implements Serializable{
 		this.taille = taille;
 	}
 
-	public double getPoids() {
+	public double getPoids() throws RemoteException{
 		return poids;
 	}
 
@@ -107,7 +116,7 @@ public class Produit implements Serializable{
 		this.poids = poids;
 	}
 
-	public String getCouleur() {
+	public String getCouleur() throws RemoteException{
 		return couleur;
 	}
 
@@ -115,7 +124,7 @@ public class Produit implements Serializable{
 		this.couleur = couleur;
 	}
 
-	public int getProduitDispo() {
+	public int getProduitDispo() throws RemoteException{
 		return produitDispo;
 	}
 
@@ -123,7 +132,7 @@ public class Produit implements Serializable{
 		this.produitDispo = produitDispo;
 	}
 
-	public double getRemise() {
+	public double getRemise() throws RemoteException{
 		return remise;
 	}
 
@@ -131,7 +140,7 @@ public class Produit implements Serializable{
 		this.remise = remise;
 	}
 
-	public String getDescription() {
+	public String getDescription() throws RemoteException{
 		return description;
 	}
 
@@ -139,11 +148,13 @@ public class Produit implements Serializable{
 		this.description = description;
 	}
 
-	public int getNote() {
+	public int getNote() throws RemoteException{
 		return note;
 	}
 
 	public void setNote(int note) {
 		this.note = note;
 	}
+
+
 }

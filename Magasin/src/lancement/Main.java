@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import implement.MagasinImpl;
+import implement.Magasin;
+import implement.Produit;
 import include.MysqlDbConnection;
-import modele.Produit;
 
 public class Main {
 
@@ -24,7 +24,7 @@ public class Main {
 			LocateRegistry.createRegistry(1099);
 			System.out.println("Hello world");
 			
-			MagasinImpl info = new MagasinImpl();
+			Magasin info = new Magasin();
 			String url = "rmi://"+InetAddress.getLocalHost().getHostAddress()+"/test";
 			System.out.println("Enregistrement de l'objet avec l'url : "+url);
 			Naming.rebind(url, info);

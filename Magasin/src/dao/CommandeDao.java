@@ -1,7 +1,7 @@
 package dao;
 
-import modele.Client;
-import modele.Commande;
+import implement.Client;
+import implement.Commande;
 
 public class CommandeDao {
 	public void create(Commande commande) {

@@ -1,0 +1,91 @@
+package implement;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import dao.PanierDao;
+import interfaces.IPanier;
+
+public class Panier extends UnicastRemoteObject implements IPanier {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private int idPanier;
+	
+	double montantPanier;
+	
+	ArrayList<Produit> listeDeProduit = new ArrayList<Produit>();
+	
+	private PanierDao panierDao = new PanierDao(); 
+	
+	public Panier() throws RemoteException
+	{
+	}		
+	
+	public Panier(int idPanier) throws RemoteException, SQLException
+	{
+		this.idPanier = idPanier;
+		this.listeDeProduit = panierDao.recupererLesProduits(this);
+		this.montantPanier = this.calculerMontantPanier(listeDeProduit);
+	}	
+	
+	public Panier ajouterProduit(Panier panier, Produit produit) throws RemoteException, SQLException
+	{
+		return panierDao.ajouterProduit(panier, produit);
+	}
+	
+	public Panier retirerProduit(Panier panier, Produit produit) throws RemoteException, SQLException
+	{
+		return panierDao.retirerProduit(panier, produit);
+	}
+	
+	public Panier ajouterUnProduitListe(Panier panier, Produit produit) 
+	{
+		listeDeProduit.add(produit);
+		this.montantPanier += produit.prixUnit;
+		return this;
+	}
+	
+	public Panier retirerUnProduitListe(Panier panier, Produit produit)
+	{
+		listeDeProduit.remove(produit);
+		this.montantPanier -= produit.prixUnit;
+		return this;
+	}
+	
+	public double calculerMontantPanier(ArrayList<Produit> listeProduits) throws RemoteException
+	{
+		return panierDao.montantPanier(listeProduits);
+	}
+
+	public int getIdPanier() throws RemoteException {
+		return idPanier;
+	}
+	
+	public double getMontantPanier() {
+		return montantPanier;
+	}
+
+	public void setMontantPanier(double montantPanier) {
+		this.montantPanier = montantPanier;
+	}
+
+	public ArrayList<Produit> getListeDeProduit() throws RemoteException{
+		return listeDeProduit;
+	}
+
+	public void setListeDeProduit(ArrayList<Produit> listeDeProduit) {
+		this.listeDeProduit = listeDeProduit;
+	}
+
+	public void setIdPanier(int idPanier) {
+		this.idPanier = idPanier;
+	}
+	
+
+}

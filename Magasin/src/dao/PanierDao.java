@@ -1,5 +1,6 @@
 package dao;
 
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,14 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import implement.Client;
+import implement.Commande;
+import implement.Panier;
+import implement.Produit;
 import include.MysqlDbConnection;
-import modele.Client;
-import modele.Commande;
-import modele.Panier;
-import modele.Produit;
 
 public class PanierDao {
-	public boolean create(Panier panier, Produit produit) throws SQLException {
+	public Panier ajouterProduit(Panier panier, Produit produit) throws SQLException, RemoteException {
+		panier.ajouterUnProduitListe(panier, produit);
 		Connection c = MysqlDbConnection.getConnection();
 		Statement stmt = null;
 		String sql = "insert into constituer (`idPanier`, `idProduit`) values ("+panier.getIdPanier()+", "+produit.getId()+")";
@@ -22,14 +24,15 @@ public class PanierDao {
 		int rs = stmt.executeUpdate(sql);	
 		stmt.close();
 		c.close();
-		return true;
+		return panier;
 	}
 
 	public void update(Panier panier) {
 		
 	}
 
-	public boolean delete(Panier panier, Produit produit) throws SQLException {
+	public Panier retirerProduit(Panier panier, Produit produit) throws SQLException, RemoteException {
+		panier.retirerUnProduitListe(panier, produit);
 		Connection c = MysqlDbConnection.getConnection();
 		Statement stmt = null;
 		String sql = "delete from constituer where constituer.idPanier = "+panier.getIdPanier()+" and constituer.idProduit = "+produit.getId();
@@ -38,10 +41,10 @@ public class PanierDao {
 		stmt.close();
 		c.close();
 		System.out.println("OK");
-		return true;
+		return panier;
 	}
 
-	public ArrayList<Produit> read(Panier panier) throws SQLException {
+	public ArrayList<Produit> recupererLesProduits(Panier panier) throws SQLException, RemoteException {
 		List<Integer> listeProduitsPanier = new ArrayList<Integer>();
 		List<Produit> listeProduits = new ArrayList<Produit>();
 		Connection c = MysqlDbConnection.getConnection();
@@ -75,7 +78,7 @@ public class PanierDao {
 		return (ArrayList<Produit>) listeProduits;
 	}
 	
-	public double montantPanier(ArrayList<Produit> listeProduits)
+	public double montantPanier(ArrayList<Produit> listeProduits) throws RemoteException
 	{
 		double montant = 0;
 		for (Produit produit : listeProduits)

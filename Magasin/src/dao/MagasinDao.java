@@ -7,12 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import implement.Client;
-import implement.Panier;
 import implement.Produit;
 import include.MysqlDbConnection;
 
-public class ProduitDao {
+public class MagasinDao {
 	public void create(Produit produit) {
 		// TODO Auto-generated method stub
 

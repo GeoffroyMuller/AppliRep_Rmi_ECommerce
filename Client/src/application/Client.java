@@ -2,6 +2,10 @@ package application;
 
 import java.rmi.Naming;
 import java.rmi.Remote;
+import java.util.ArrayList;
+
+import interfaces.IMagasin;
+import interfaces.IProduit;
 
 /**
  * Client Singleton
@@ -21,7 +25,7 @@ public class Client {
 		}
 		return client;
 	}
-
+	
 	/**
 	 * Permet de connecter le client
 	 * @param ip du serveur
@@ -38,4 +42,24 @@ public class Client {
 		}
 		System.out.println("Fin du client");
 	}
+	
+//	/**
+//	 * Permet d'effectuer des test
+//	 */
+//	public static void testGetListe() {
+//		System.out.println( "Lancement du client!" );
+//		try {
+//			Remote r = Naming.lookup("rmi://192.168.0.17/test");
+//			ArrayList<IProduit> listeProduit = new ArrayList<IProduit>();
+//			listeProduit = ((IMagasin)r).getListeProduit();
+//			for (IProduit produit : listeProduit)
+//			{
+//				System.out.println(produit.getCouleur());
+//			}
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+//		System.out.println("Fin du client");
+//	}
 }

@@ -10,11 +10,10 @@ import java.util.ArrayList;
 
 import include.MysqlDbConnection;
 import interfaces.IBanque;
-import modele.Produit;
 
-public class BanqueImpl extends UnicastRemoteObject implements IBanque{
+public class Banque extends UnicastRemoteObject implements IBanque{
 
-	public BanqueImpl() throws RemoteException {
+	protected Banque() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
