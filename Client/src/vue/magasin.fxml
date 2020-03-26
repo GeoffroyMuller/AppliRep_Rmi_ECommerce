@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurMagasin">
+   <right>
+      <VBox prefHeight="558.0" prefWidth="271.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER" />
+   </right>
+   <left>
+      <Pane prefHeight="558.0" prefWidth="35.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER" />
+   </left>
+   <top>
+      <Pane prefHeight="64.0" prefWidth="801.0" style="-fx-background-color: #293847;" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <ListView fx:id="list_produit" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
