@@ -47,8 +47,6 @@ public class ControleurPanierProduit implements Initializable, Observer{
 			sessionClient = ClientApp.getSessionClientCourant();
 			panier = ClientApp.getListePaniers().get(sessionClient);
 			panier.addObserver(this);
-//			panier = ClientApp.getSessionClientCourant().recupererPanier();
-//			idPlacement = ControleurMagasin.getNoProduitPanierCourant();
 			produitCourant = ClientApp.getMagasinCourant()
 					.getListeProduit().get(ControleurMagasin.getNoProduitPanierCourant());
 			
@@ -82,21 +80,27 @@ public class ControleurPanierProduit implements Initializable, Observer{
 
 	@FXML
 	public void retirerDuPanier() {
-
+		
 	}
 	
 	/**
 	 * Charge le produit courant
 	 * @throws RemoteException
 	 */
-	public void chargerProduitCourant() throws RemoteException {
-		label_nomproduit.setText(produitCourant.getNom());
-		tf_quantite.setText("");
+	public void chargerProduitCourant(){
+		try {
+			label_nomproduit.setText(produitCourant.getNom());
+			tf_quantite.setText(""+panier.getListeQuantites()
+			.get(produitCourant.getId()-1));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		panier = (Panier)o;
+		chargerProduitCourant();
 	}
 }

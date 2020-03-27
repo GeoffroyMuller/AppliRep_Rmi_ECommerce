@@ -10,7 +10,7 @@
       <Pane prefHeight="558.0" prefWidth="8.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER" />
    </left>
    <top>
-      <Pane prefHeight="64.0" prefWidth="801.0" style="-fx-background-color: #293847;" BorderPane.alignment="CENTER" />
+      <Pane prefHeight="9.0" prefWidth="959.0" style="-fx-background-color: #293847;" BorderPane.alignment="CENTER" />
    </top>
    <center>
       <HBox prefHeight="558.0" prefWidth="596.0" BorderPane.alignment="CENTER">

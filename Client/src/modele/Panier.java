@@ -57,4 +57,13 @@ public class Panier extends Observable{
 			e.printStackTrace();
 		}
 	}
+
+	public ArrayList<Integer> getListeQuantites() {
+		return listeQuantites;
+	}
+
+	public ArrayList<IProduit> getListeProduits() {
+		return listeProduits;
+	}
+	
 }
