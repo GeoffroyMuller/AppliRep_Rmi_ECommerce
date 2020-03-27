@@ -112,6 +112,10 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 		this.montantPanier = montantPanier;
 	}
 
+	public ArrayList<Integer> getQuantiteProduit() throws RemoteException{
+		return listeQuantite;
+	}
+	
 	public ArrayList<Produit> getListeDeProduit() throws RemoteException{
 		return listeDeProduit;
 	}
