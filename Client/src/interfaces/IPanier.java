@@ -12,6 +12,8 @@ public interface IPanier extends Remote {
 	
 	public void retirerProduit(int idProduit) throws RemoteException, SQLException;
 	
+	public void retirerToutesQuantites( int idProduit) throws SQLException, RemoteException; 
+	
 	public double calculerMontantPanier() throws RemoteException;
 	
 	public ArrayList<Integer> getQuantiteProduit() throws RemoteException;

@@ -72,6 +72,23 @@ public class PanierDao {
 	}
 	
 	/**
+	 * Retire toutes les quantités d'un produit
+	 * @param idPanier
+	 * @param idProduit
+	 * @throws SQLException
+	 * @throws RemoteException
+	 */
+	public void retirerToutesQuantites(int idPanier, int idProduit) throws SQLException, RemoteException {
+		Connection c = MysqlDbConnection.getConnection();
+		Statement stmt = null;
+		String sql = "delete from constituer where constituer.idPanier = "+idPanier+" and constituer.idProduit = "+idProduit;
+		stmt = c.createStatement();
+		stmt.executeUpdate(sql);	
+		stmt.close();
+		c.close();
+	}
+	
+	/**
 	 * Modifie la quantité d'un produit dans un panier
 	 * @param idPanier
 	 * @param idProduit

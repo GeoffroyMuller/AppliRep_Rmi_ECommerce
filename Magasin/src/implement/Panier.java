@@ -88,6 +88,11 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 		}
 	}
 	
+	public void retirerToutesQuantites( int idProduit) throws SQLException, RemoteException 
+	{
+		panierDao.retirerToutesQuantites(this.idPanier, idProduit);
+	}
+	
 	public double calculerMontantPanier() throws RemoteException
 	{
 		double montantPanier = 0;
