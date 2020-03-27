@@ -53,9 +53,9 @@ public class Client extends UnicastRemoteObject implements IClient{
 		return clientDao.connexionClient(mail, mdp);
 	}
 	
-	public Panier recuperePanier(int idClient) throws RemoteException, SQLException
+	public Panier recuperePanier() throws RemoteException, SQLException
 	{
-		return clientDao.recupererPanier(idClient);
+		return clientDao.recupererPanier(this.id);
 	}
 	
 	public int getId() throws RemoteException {
