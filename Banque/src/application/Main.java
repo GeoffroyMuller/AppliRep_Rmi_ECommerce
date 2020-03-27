@@ -1,26 +1,24 @@
 package application;
 	
-import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import java.net.InetAddress;
+import java.rmi.Naming;
+import java.rmi.registry.LocateRegistry;
+import java.sql.SQLException;
 
+import implement.Banque;
 
-public class Main extends Application {
-	@Override
-	public void start(Stage primaryStage) {
+public class Main{
+	public static void main(String[] args) throws SQLException {
 		try {
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch(Exception e) {
+			LocateRegistry.createRegistry(1099);
+			System.out.println("Serveur de la banque");
+			Banque banque = new Banque();
+			String urlBanque = "rmi://"+InetAddress.getLocalHost().getHostAddress()+"/banque";
+			System.out.println("Enregistrement de l'objet avec l'url : "+urlBanque);
+			Naming.rebind(urlBanque, banque);
+			System.out.println("Serveur lancé");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public static void main(String[] args) {
-		launch(args);
 	}
 }

@@ -16,6 +16,8 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 	
 	double montantPanier;
 	
+	ArrayList<Integer> listeQuantite = new ArrayList<Integer>();
+	
 	ArrayList<Produit> listeDeProduit = new ArrayList<Produit>();
 	
 	private PanierDao panierDao = new PanierDao(); 
@@ -28,39 +30,86 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 	{
 		this.idPanier = idPanier;
 		this.listeDeProduit = panierDao.recupererLesProduits(this.getIdPanier());
+		this.listeQuantite = panierDao.recupererLesQuantite(this.getIdPanier());
 		this.montantPanier = this.calculerMontantPanier();
 	}	
 	
 	public void ajouterProduit(int idPanier, int idProduit) throws RemoteException, SQLException
 	{
-		panierDao.ajouterProduit(idPanier, idProduit);
+		int idProduitExistant = 0;
+		int quantite = 0;
+		int i = 0;
+		for (Produit produit : this.listeDeProduit)
+		{
+			if (produit.getId() == idProduit)
+			{
+				idProduitExistant = produit.getId();
+				quantite = listeQuantite.get(i);
+			}
+			i++;
+		}
+		if (idProduitExistant == idProduit)
+		{
+			panierDao.ajouterQuantite(idPanier, idProduit, quantite);
+			this.listeDeProduit = panierDao.recupererLesProduits(this.getIdPanier());
+			this.listeQuantite = panierDao.recupererLesQuantite(this.getIdPanier());
+		}
+		else
+		{
+			panierDao.ajouterProduit(idPanier, idProduit);
+			this.listeDeProduit = panierDao.recupererLesProduits(this.getIdPanier());
+			this.listeQuantite = panierDao.recupererLesQuantite(this.getIdPanier());
+		}
 	}
 	
 	public void retirerProduit(int idPanier, int idProduit) throws RemoteException, SQLException
 	{
-		panierDao.retirerProduit(idPanier, idProduit);
+		int quantite = 0;
+		int i = 0;
+		for (Produit produit : this.listeDeProduit)
+		{
+			if (produit.getId() == idProduit)
+			{
+				quantite = listeQuantite.get(i);
+			}
+			i++;
+		}
+		if (quantite > 1)
+		{
+			panierDao.retirerQuantite(idPanier, idProduit, quantite);
+			this.listeDeProduit = panierDao.recupererLesProduits(this.getIdPanier());
+			this.listeQuantite = panierDao.recupererLesQuantite(this.getIdPanier());
+		}
+		else
+		{
+			panierDao.retirerProduit(idPanier, idProduit);
+			this.listeDeProduit = panierDao.recupererLesProduits(this.getIdPanier());
+			this.listeQuantite = panierDao.recupererLesQuantite(this.getIdPanier());
+		}
 	}
 	
-	public Panier ajouterUnProduitListe(Panier panier, Produit produit) 
-	{
-		listeDeProduit.add(produit);
-		this.montantPanier += produit.prixUnit;
-		return this;
-	}
-	
-	public Panier retirerUnProduitListe(Panier panier, Produit produit)
-	{
-		listeDeProduit.remove(produit);
-		this.montantPanier -= produit.prixUnit;
-		return this;
-	}
+//	public Panier ajouterUnProduitListe(Panier panier, Produit produit) 
+//	{
+//		listeDeProduit.add(produit);
+//		this.montantPanier += produit.prixUnit;
+//		return this;
+//	}
+//	
+//	public Panier retirerUnProduitListe(Panier panier, Produit produit)
+//	{
+//		listeDeProduit.remove(produit);
+//		this.montantPanier -= produit.prixUnit;
+//		return this;
+//	}
 	
 	public double calculerMontantPanier() throws RemoteException
 	{
 		double montantPanier = 0;
+		int i = 0;
 		for(Produit produit : this.listeDeProduit)
 		{
-			montantPanier += produit.getPrixUnit();
+			montantPanier += produit.getPrixUnit()*this.listeQuantite.get(i);
+			i++;
 		}
 		return montantPanier;
 	}

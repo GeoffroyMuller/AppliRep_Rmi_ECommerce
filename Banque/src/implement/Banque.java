@@ -13,12 +13,12 @@ import interfaces.IBanque;
 
 public class Banque extends UnicastRemoteObject implements IBanque{
 
-	protected Banque() throws RemoteException {
+	public Banque() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public boolean verifierSolvabilite(String identifiants, double montant) throws SQLException
+	public boolean verifierSolvabilite(String identifiants, double montant) throws RemoteException, SQLException
 	{
 		double solve = 0;
 		Connection c = MysqlDbConnection.getConnection();

@@ -26,7 +26,7 @@ public class ClientDao {
 		
 		rs.next();
 		Client cli = new Client(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("rue"), rs.getInt("cp"), rs.getInt("numRue")
-				, rs.getInt("age"), rs.getString("mail"), rs.getString("mdp"));		
+				, rs.getInt("age"), rs.getString("mail"), rs.getString("mdp"), rs.getInt("idPanier"));		
 		
 		rs.close();
 		stmt.close();

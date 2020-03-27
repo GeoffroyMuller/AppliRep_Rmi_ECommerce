@@ -1,4 +1,4 @@
-package lancement;
+package application;
 
 import java.net.InetAddress;
 import java.rmi.Naming;

@@ -20,6 +20,7 @@ public class Client extends UnicastRemoteObject implements IClient{
 	int age;
 	String mail;
 	String mdp;
+	int idPanier;
 	
 	ClientDao clientDao = new ClientDao();
 	
@@ -28,7 +29,7 @@ public class Client extends UnicastRemoteObject implements IClient{
 		
 	}
 	
-	public Client(int id, String nom, String prenom, String rue, int cp, int numRue, int age, String mail, String mdp) throws RemoteException
+	public Client(int id, String nom, String prenom, String rue, int cp, int numRue, int age, String mail, String mdp, int idPanier) throws RemoteException
 	{
 		this.id = id;
 		this.nom = nom;
@@ -39,6 +40,7 @@ public class Client extends UnicastRemoteObject implements IClient{
 		this.age = age;
 		this.mail = mail;
 		this.mdp = mdp;
+		this.idPanier = idPanier;
 	}
 	
 	public Client connexionClient() throws RemoteException, SQLException

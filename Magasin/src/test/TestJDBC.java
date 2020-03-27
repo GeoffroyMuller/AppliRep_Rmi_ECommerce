@@ -1,5 +1,7 @@
 package test;
 
+import java.rmi.Naming;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,6 +17,7 @@ import implement.Magasin;
 import implement.Panier;
 import implement.Produit;
 import include.MysqlDbConnection;
+import interfaces.IBanque;
 
 public class TestJDBC {
 	public static void main(String[] args) throws SQLException, RemoteException {
@@ -25,9 +28,25 @@ public class TestJDBC {
 		MagasinDao magasinDao = new MagasinDao();
 		ClientDao clientdao = new ClientDao();
 		
-		Panier p = clientdao.recupererPanier(2);
 		
-		System.out.println(p.getIdPanier());
+		System.out.println(panier.getMontantPanier());
+		
+		/**
+		 * METHODE DE CONNEXION 
+		 * @return UN BOOLEAN POUR LA SOLVABILITE
+		 * VALIDE
+		 */
+//		try {
+//			Remote r = Naming.lookup("rmi://192.168.0.17/banque");
+//			System.out.println(r);
+//			boolean solva = ((IBanque)r).verifierSolvabilite("GEO123GEO", 240.00);
+//			System.out.println(solva);
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+		
 		/**
 		 * METHODE DE CONNEXION 
 		 * @return : UN CLIENT
