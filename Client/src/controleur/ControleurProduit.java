@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import application.Client;
+import application.ClientApp;
 import interfaces.IMagasin;
 import interfaces.IProduit;
 import javafx.fxml.FXML;
@@ -27,14 +27,19 @@ public class ControleurProduit implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		IMagasin magasin = Client.dernierMagasin();
+		IMagasin magasin = ClientApp.dernierMagasin();
 		try {
-			ArrayList<IProduit> listeProduits = Client.dernierMagasin().getListeProduit();
+			ArrayList<IProduit> listeProduits = ClientApp.dernierMagasin().getListeProduit();
 			produit = listeProduits.get(ControleurMagasin.getNoProduitCourant());
 			chargerProduitCourant();
 		} catch (RemoteException e) {
 			alertErreur_Charge();
 		}
+	}
+	
+	@FXML
+	public void ajouterAuPanier() {
+		
 	}
 	
 	/**

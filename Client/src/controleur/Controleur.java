@@ -3,7 +3,7 @@ package controleur;
 import java.io.IOException;
 import java.rmi.ConnectException;
 
-import application.Client;
+import application.ClientApp;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,7 +48,8 @@ public class Controleur {
 
 			try {
 				recupereIpPort();
-				Client.connection(IP, PORT);
+				ClientApp.connection(IP, PORT);
+				ClientApp.connexionSessionClient(IP, PORT);
 				chargerMagasin();
 			} catch (ConnectException e) {
 				alertConnexionEchouee("Le serveur distant n'est pas accessible");
@@ -59,6 +60,27 @@ public class Controleur {
 						+"\n  exemple : 192.168.43.1:1099");
 			}
 		
+	}
+	
+	/**
+	 * Charge le fxml du magasin dans un nouvel onglet
+	 */
+	private void chargerMagasin() {
+		ObservableList<Tab> list_tabs = tab_onglets.getTabs();
+		list_tabs.add(new Tab(""+IP+" : "+PORT));
+		FXMLLoader loader = new FXMLLoader(getClass()
+				.getResource("/vue/magasin.fxml"));
+
+		BorderPane node;
+		try {
+			node = loader.load();
+			node.getStylesheets().add(getClass().getResource("/vue/style/principal.css").toExternalForm());
+			node.prefWidthProperty().bind(tab_onglets.widthProperty());
+			node.prefHeightProperty().bind(tab_onglets.heightProperty());
+			list_tabs.get(list_tabs.size()-1).setContent(node);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -78,31 +100,11 @@ public class Controleur {
 		IP = ipPort[0];
 		PORT = ipPort[1];
 	}
-	
-	/**
-	 * Charge le fxml du magasin dans un nouvel onglet
-	 */
-	private void chargerMagasin() {
-		ObservableList<Tab> list_tabs = tab_onglets.getTabs();
-		list_tabs.add(new Tab(""+IP+" : "+PORT));
-		FXMLLoader loader = new FXMLLoader(getClass()
-				.getResource("/vue/magasin.fxml"));
-
-		BorderPane node;
-		try {
-			node = loader.load();
-			node.prefWidthProperty().bind(tab_onglets.widthProperty());
-			node.prefHeightProperty().bind(tab_onglets.heightProperty());
-			list_tabs.get(list_tabs.size()-1).setContent(node);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * affiche une alert specifique à l'ip et le port
 	 */
-	public static void alertConnexionEchouee(String msg) {
+	public void alertConnexionEchouee(String msg) {
 		Alert alert = new Alert(AlertType.WARNING); alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Attention");
 		alert.setHeaderText("Connexion échouée");
