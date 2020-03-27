@@ -34,7 +34,7 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 		this.montantPanier = this.calculerMontantPanier();
 	}	
 	
-	public void ajouterProduit(int idPanier, int idProduit) throws RemoteException, SQLException
+	public void ajouterProduit(int idProduit) throws RemoteException, SQLException
 	{
 		int idProduitExistant = 0;
 		int quantite = 0;
@@ -50,19 +50,19 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 		}
 		if (idProduitExistant == idProduit)
 		{
-			panierDao.ajouterQuantite(idPanier, idProduit, quantite);
+			panierDao.ajouterQuantite(this.idPanier, idProduit, quantite);
 			this.listeDeProduit = panierDao.recupererLesProduits(this.getIdPanier());
 			this.listeQuantite = panierDao.recupererLesQuantite(this.getIdPanier());
 		}
 		else
 		{
-			panierDao.ajouterProduit(idPanier, idProduit);
+			panierDao.ajouterProduit(this.idPanier, idProduit);
 			this.listeDeProduit = panierDao.recupererLesProduits(this.getIdPanier());
 			this.listeQuantite = panierDao.recupererLesQuantite(this.getIdPanier());
 		}
 	}
 	
-	public void retirerProduit(int idPanier, int idProduit) throws RemoteException, SQLException
+	public void retirerProduit(int idProduit) throws RemoteException, SQLException
 	{
 		int quantite = 0;
 		int i = 0;
@@ -76,31 +76,17 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 		}
 		if (quantite > 1)
 		{
-			panierDao.retirerQuantite(idPanier, idProduit, quantite);
+			panierDao.retirerQuantite(this.idPanier, idProduit, quantite);
 			this.listeDeProduit = panierDao.recupererLesProduits(this.getIdPanier());
 			this.listeQuantite = panierDao.recupererLesQuantite(this.getIdPanier());
 		}
 		else
 		{
-			panierDao.retirerProduit(idPanier, idProduit);
+			panierDao.retirerProduit(this.idPanier, idProduit);
 			this.listeDeProduit = panierDao.recupererLesProduits(this.getIdPanier());
 			this.listeQuantite = panierDao.recupererLesQuantite(this.getIdPanier());
 		}
 	}
-	
-//	public Panier ajouterUnProduitListe(Panier panier, Produit produit) 
-//	{
-//		listeDeProduit.add(produit);
-//		this.montantPanier += produit.prixUnit;
-//		return this;
-//	}
-//	
-//	public Panier retirerUnProduitListe(Panier panier, Produit produit)
-//	{
-//		listeDeProduit.remove(produit);
-//		this.montantPanier -= produit.prixUnit;
-//		return this;
-//	}
 	
 	public double calculerMontantPanier() throws RemoteException
 	{

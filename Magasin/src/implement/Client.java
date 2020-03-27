@@ -112,5 +112,4 @@ public class Client extends UnicastRemoteObject implements IClient{
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
-	
 }

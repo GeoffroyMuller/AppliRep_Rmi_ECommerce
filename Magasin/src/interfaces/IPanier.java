@@ -10,9 +10,9 @@ import implement.Produit;
 
 public interface IPanier extends Remote{
 
-	public void ajouterProduit(int idPanier, int idProduit) throws RemoteException, SQLException;
+	public void ajouterProduit(int idProduit) throws RemoteException, SQLException;
 	
-	public void retirerProduit(int idPanier, int idProduit) throws RemoteException, SQLException;
+	public void retirerProduit(int idProduit) throws RemoteException, SQLException;
 	
 	public double calculerMontantPanier() throws RemoteException;
 

@@ -11,13 +11,8 @@ import interfaces.IProduit;
 
 public class Produit extends UnicastRemoteObject implements IProduit{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 */
+	
 	int id;
 	String nom;
 	int stock;

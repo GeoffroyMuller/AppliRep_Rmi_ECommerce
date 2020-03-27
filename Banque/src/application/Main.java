@@ -8,12 +8,14 @@ import java.sql.SQLException;
 import implement.Banque;
 
 public class Main{
+	private static int PORT = 1099;
+	private static String IP = "127.0.0.1";
 	public static void main(String[] args) throws SQLException {
 		try {
 			LocateRegistry.createRegistry(1099);
 			System.out.println("Serveur de la banque");
 			Banque banque = new Banque();
-			String urlBanque = "rmi://"+InetAddress.getLocalHost().getHostAddress()+"/banque";
+			String urlBanque = "rmi://"+InetAddress.getLocalHost().getHostAddress()+":"+PORT+"/banque";
 			System.out.println("Enregistrement de l'objet avec l'url : "+urlBanque);
 			Naming.rebind(urlBanque, banque);
 			System.out.println("Serveur lancé");

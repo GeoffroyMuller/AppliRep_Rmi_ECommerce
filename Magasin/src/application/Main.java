@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import implement.Banque;
 import implement.Client;
 import implement.Magasin;
 import implement.Panier;
@@ -20,7 +21,7 @@ import interfaces.IClient;
 
 public class Main {
 	
-	private static int PORT = 1099;
+	private static int PORT = 1098;
 	private static String IP = "127.0.0.1";
 
 	public static void main(String[] args) throws SQLException {
@@ -42,6 +43,11 @@ public class Main {
 			String urlClient = "rmi://"+InetAddress.getLocalHost().getHostAddress()+":"+PORT+"/client";
 			System.out.println("Enregistrement de l'objet avec l'url : "+urlClient);
 			Naming.rebind(urlClient, client);
+			
+			Banque banque = new Banque();
+			String urlBanque = "rmi://"+InetAddress.getLocalHost().getHostAddress()+":"+PORT+"/banque";
+			System.out.println("Enregistrement de l'objet avec l'url : "+urlBanque);
+			Naming.rebind(urlBanque, banque);
 			
 			System.out.println("Serveur lancé");
 			

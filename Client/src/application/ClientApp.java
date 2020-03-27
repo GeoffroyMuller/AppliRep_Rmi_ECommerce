@@ -3,10 +3,12 @@ package application;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import interfaces.IBanque;
 import interfaces.IClient;
 import interfaces.IMagasin;
 import interfaces.IPanier;
@@ -86,33 +88,19 @@ public class ClientApp {
 	
 	
 	
-//	/**
-//	 * Permet d'effectuer des test
-//	 */
-//	public static void testClient() {
-//		System.out.println( "Lancement du client!" );
-//		try {
-//			Remote r = Naming.lookup("rmi://192.168.0.17/client");
-//			IClient iclient = ((IClient)r).connexionClient("geo@gmail.com", "geo");
-//			System.out.println(iclient.getId());
-//			IPanier ipanier = iclient.recuperePanier(iclient.getId());
-//			System.out.println(ipanier.getIdPanier());
-//			ArrayList<IProduit> listeProduit = new ArrayList<IProduit>();
-//			listeProduit = ipanier.getListeDeProduit();
-//			for(IProduit produit : listeProduit)
-//			{
-//				System.out.println(produit.getNom());
-//			}
-//			ArrayList<IProduit> listeProduit = new ArrayList<IProduit>();
-//			listeProduit = ((IMagasin)r).getListeProduit();
-//			for (IProduit produit : listeProduit)
-//			{
-//				System.out.println(produit.getCouleur());
-//			}
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
-//		System.out.println("Fin du client");
-//	}
+	/**
+	 * Permet d'effectuer des test
+	 */
+	public static void testClient() {
+		System.out.println( "Lancement du client!" );
+		try {
+			Remote r = Naming.lookup("rmi://192.168.0.17:1099/banque");
+			boolean ibanque = ((IBanque)r).verifierSolvabilite("GEO123GEO", 20.00);
+			System.out.println(ibanque);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		System.out.println("Fin du client");
+	}
 }
