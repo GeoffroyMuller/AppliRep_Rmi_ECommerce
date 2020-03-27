@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public interface IPanier extends Remote {
 	
-	public IPanier ajouterProduit(int idProduit) throws RemoteException, SQLException;
+	public void ajouterProduit(int idProduit) throws RemoteException, SQLException;
 	
-	public IPanier retirerProduit(int idProduit) throws RemoteException, SQLException;
+	public void retirerProduit(int idProduit) throws RemoteException, SQLException;
 	
 	public double calculerMontantPanier() throws RemoteException;
 
