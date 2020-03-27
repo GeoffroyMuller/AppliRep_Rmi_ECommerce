@@ -9,14 +9,17 @@ import java.util.Observer;
 import java.util.ResourceBundle;
 
 import application.ClientApp;
+import interfaces.IClient;
 import interfaces.IMagasin;
 import interfaces.IPanier;
 import interfaces.IProduit;
+import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import modele.Panier;
 import javafx.scene.control.Alert.AlertType;
 
 /**
@@ -24,34 +27,14 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class ControleurPanierProduit implements Initializable, Observer{
 
-	private IPanier panier;
-
+	private IClient sessionClient;
+	
+	private Panier panier;
 	/**
 	 * Produit courant
 	 */
 	private IProduit produitCourant;
 
-	/**
-	 * Quantité du produit dans le panier
-	 */
-	private int qtProduit;
-	
-	/**
-	 * Id representant l'emplacement du produit du panier courant
-	 * cette valeur sera utilisées pour les actualisations des listes
-	 */
-	private int idPlacement;
-	
-	/**
-	 * Liste des produits présent dans le panier
-	 */
-	private ArrayList<IProduit> listeProduits;
-
-	/**
-	 * Liste des quantités de chaque produit du panier
-	 */
-	private ArrayList<Integer> listeQuantites;
-	
 	@FXML
 	private Label label_nomproduit;
 
@@ -61,20 +44,17 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
-			panier = ClientApp.getSessionClientCourant().recupererPanier();
-			idPlacement = ControleurMagasin.getNoProduitPanierCourant();
+			sessionClient = ClientApp.getSessionClientCourant();
+			panier = ClientApp.getListePaniers().get(sessionClient);
+			panier.addObserver(this);
+//			panier = ClientApp.getSessionClientCourant().recupererPanier();
+//			idPlacement = ControleurMagasin.getNoProduitPanierCourant();
+			produitCourant = ClientApp.getMagasinCourant()
+					.getListeProduit().get(ControleurMagasin.getNoProduitPanierCourant());
 			
-			try {
-				listeQuantites = panier.getQuantiteProduit();
-				listeProduits = panier.getListeDeProduit();
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-			produitCourant = listeProduits.get(idPlacement);
-			qtProduit = listeQuantites.get(idPlacement);
 			chargerProduitCourant();
 
-		} catch (RemoteException | SQLException e) {
+		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 	}
@@ -82,11 +62,9 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	@FXML
 	public void moinsUn() {
 		try {
-			actualiserQuantite();
-			System.out.println("avmoins:"+qtProduit);
 			panier.retirerProduit(produitCourant.getId());
-			actualiserQuantite();
-		} catch (RemoteException | SQLException e) {
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -94,13 +72,12 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	@FXML
 	public void plusUn() {
 		try {
-			actualiserQuantite();
-			System.out.println("avplus:"+qtProduit);
 			panier.ajouterProduit(produitCourant.getId());
-			actualiserQuantite();
-		} catch (RemoteException | SQLException e) {
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 	@FXML
@@ -114,26 +91,12 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	 */
 	public void chargerProduitCourant() throws RemoteException {
 		label_nomproduit.setText(produitCourant.getNom());
-		tf_quantite.setText(""+qtProduit);
+		tf_quantite.setText("");
 
-	}
-	
-	/**
-	 * Actualise les attribus de quantité
-	 */
-	private void actualiserQuantite() {
-		try {
-			listeQuantites = panier.getQuantiteProduit();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		qtProduit = listeQuantites.get(idPlacement);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		panier = (Panier)o;
 	}
-
 }

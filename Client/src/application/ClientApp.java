@@ -7,12 +7,12 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import interfaces.IBanque;
 import interfaces.IClient;
 import interfaces.IMagasin;
 import interfaces.IPanier;
-import interfaces.IProduit;
+import modele.Panier;
 
 /**
  * Client Singleton
@@ -32,9 +32,9 @@ public class ClientApp {
 
 	private static ClientApp clientApp;
 
-	private static ArrayList<IClient> listeSessionClient;
-
 	private static ArrayList<IMagasin> listeMagasins;
+	
+	private static HashMap<IClient, Panier> listePaniers;
 
 	/**
 	 * Renvoie l'instance de client 
@@ -78,8 +78,8 @@ public class ClientApp {
 		IClient obj;
 		obj = (IClient)Naming.lookup("rmi://"+ip+":"+port+"/client");
 		sessionClientCourant = obj.connexionClient("geo@gmail.com", "geo");
-		listeSessionClient = new ArrayList<IClient>();
-		listeSessionClient.add(sessionClientCourant);
+		listePaniers = new HashMap<IClient, Panier>();
+		listePaniers.put( sessionClientCourant, new Panier(sessionClientCourant.recupererPanier()));
 	}
 
 	public static IMagasin getMagasinCourant() {
@@ -94,8 +94,9 @@ public class ClientApp {
 		return listeMagasins;
 	}
 
-	public static ArrayList<IClient> getListeSessionClient() {
-		return listeSessionClient;
+	
+	public static HashMap<IClient, Panier> getListePaniers() {
+		return listePaniers;
 	}
 
 	/**

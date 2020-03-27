@@ -26,6 +26,8 @@ public class ControleurMagasin implements Initializable{
 	private IMagasin magasin;
 
 	private IClient sessionClient;
+	
+	private ArrayList<IProduit> listeProduits;
 
 	/**
 	 * Numero du produit qui est en train d'étre chargé
@@ -48,7 +50,8 @@ public class ControleurMagasin implements Initializable{
 		try {
 			magasin = ClientApp.getMagasinCourant();
 			sessionClient = ClientApp.getSessionClientCourant();
-
+			listeProduits = magasin.getListeProduit();
+			
 			chargerProduit();
 			chargerPanier();
 		} catch (IOException | SQLException e) {
@@ -62,10 +65,7 @@ public class ControleurMagasin implements Initializable{
 	 */
 	@FXML
 	public void chargerProduit() throws IOException {
-		ArrayList<IProduit> listeProduits = magasin.getListeProduit();
-
 		BorderPane nodeproduit;
-
 		for(int i=0; i<listeProduits.size(); i++) {
 			noProduitCourant = i;
 			FXMLLoader loader = new FXMLLoader(getClass()
