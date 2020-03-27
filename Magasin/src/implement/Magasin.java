@@ -6,19 +6,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.MagasinDao;
-import dao.ProduitDao;
 import interfaces.IMagasin;
-import interfaces.IProduit;
 
 public class Magasin extends UnicastRemoteObject implements IMagasin{
 	
+	private static final long serialVersionUID = 1L;
+
 	ArrayList<Produit> listeProduit = new ArrayList<Produit>();
 	
 	MagasinDao magasinDao = new MagasinDao();
 	
 	public Magasin() throws RemoteException, SQLException
 	{
-		this.listeProduit = magasinDao.getProduits();
+		this.listeProduit = magasinDao.recupererProduits();
 	}
 
 	public ArrayList<Produit> getListeProduit() throws RemoteException{

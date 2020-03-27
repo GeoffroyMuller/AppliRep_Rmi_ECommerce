@@ -8,31 +8,44 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import implement.Client;
-import implement.Commande;
 import implement.Panier;
 import implement.Produit;
 import include.MysqlDbConnection;
 
 public class PanierDao {
 	
+	/**
+	 * Ajoute un produit dans un panier
+	 * @param idPanier
+	 * @param idProduit
+	 * @throws SQLException
+	 * @throws RemoteException
+	 */
 	public void ajouterProduit(int idPanier, int idProduit) throws SQLException, RemoteException {
 		Connection c = MysqlDbConnection.getConnection();
 		Statement stmt = null;
 		String sql = "insert into constituer (`idPanier`, `idProduit`, `quantiteProduit`) values ("+idPanier+", "+idProduit+", "+1+")";
 		stmt = c.createStatement();
-		int rs = stmt.executeUpdate(sql);	
+		stmt.executeUpdate(sql);	
 		stmt.close();
 		c.close();
 	}
 	
+	/**
+	 * Modifie la quantité d'un produit dans un panier
+	 * @param idPanier
+	 * @param idProduit
+	 * @param quantite
+	 * @throws SQLException
+	 * @throws RemoteException
+	 */
 	public void ajouterQuantite(int idPanier, int idProduit, int quantite) throws SQLException, RemoteException {
 		Connection c = MysqlDbConnection.getConnection();
 		Statement stmt = null;
 		quantite += 1;
 		String sql = "update constituer set quantiteProduit = "+quantite+" where constituer.idPanier = "+idPanier+" and constituer.idProduit = "+idProduit;
 		stmt = c.createStatement();
-		int rs = stmt.executeUpdate(sql);	
+		stmt.executeUpdate(sql);	
 		stmt.close();
 		c.close();
 	}
@@ -41,28 +54,49 @@ public class PanierDao {
 		
 	}
 
+	/**
+	 * Retire un produit d'un panier
+	 * @param idPanier
+	 * @param idProduit
+	 * @throws SQLException
+	 * @throws RemoteException
+	 */
 	public void retirerProduit(int idPanier, int idProduit) throws SQLException, RemoteException {
 		Connection c = MysqlDbConnection.getConnection();
 		Statement stmt = null;
 		String sql = "delete from constituer where constituer.idPanier = "+idPanier+" and constituer.idProduit = "+idProduit;
 		stmt = c.createStatement();
-		int rs = stmt.executeUpdate(sql);	
+		stmt.executeUpdate(sql);	
 		stmt.close();
 		c.close();
-		System.out.println("OK");
 	}
 	
+	/**
+	 * Modifie la quantité d'un produit dans un panier
+	 * @param idPanier
+	 * @param idProduit
+	 * @param quantite
+	 * @throws SQLException
+	 * @throws RemoteException
+	 */
 	public void retirerQuantite(int idPanier, int idProduit, int quantite) throws SQLException, RemoteException {
 		Connection c = MysqlDbConnection.getConnection();
 		Statement stmt = null;
 		quantite -= 1;
 		String sql = "update constituer set quantiteProduit = "+quantite+" where constituer.idPanier = "+idPanier+" and constituer.idProduit = "+idProduit;
 		stmt = c.createStatement();
-		int rs = stmt.executeUpdate(sql);	
+		stmt.executeUpdate(sql);	
 		stmt.close();
 		c.close();
 	}
 
+	/**
+	 * Récupère la liste de produits d'un panier
+	 * @param idPanier
+	 * @return
+	 * @throws SQLException
+	 * @throws RemoteException
+	 */
 	public ArrayList<Produit> recupererLesProduits(int idPanier) throws SQLException, RemoteException {
 		List<Integer> listeProduitsPanier = new ArrayList<Integer>();
 		List<Produit> listeProduits = new ArrayList<Produit>();
@@ -91,12 +125,18 @@ public class PanierDao {
 			rsProduits.close();
 		}
 		rs.close();
-		
 		stmt.close();
 		c.close();
 		return (ArrayList<Produit>) listeProduits;
 	}
 	
+	/**
+	 * Récupère les quantités de chaque produit dans le panier
+	 * @param idPanier
+	 * @return
+	 * @throws SQLException
+	 * @throws RemoteException
+	 */
 	public ArrayList<Integer> recupererLesQuantite(int idPanier) throws SQLException, RemoteException {
 		List<Integer> listeQuantitePanier = new ArrayList<Integer>();
 		Connection c = MysqlDbConnection.getConnection();
@@ -110,7 +150,6 @@ public class PanierDao {
 			
 		}
 		rs.close();
-		
 		stmt.close();
 		c.close();
 		return (ArrayList<Integer>) listeQuantitePanier;

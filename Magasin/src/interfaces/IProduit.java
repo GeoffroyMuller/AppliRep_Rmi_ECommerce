@@ -1,10 +1,6 @@
 package interfaces;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import implement.Produit;
 
 public interface IProduit extends Remote{
 	

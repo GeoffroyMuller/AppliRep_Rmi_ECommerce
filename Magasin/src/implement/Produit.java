@@ -1,12 +1,7 @@
 package implement;
 
-import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import dao.ProduitDao;
 import interfaces.IProduit;
 
 public class Produit extends UnicastRemoteObject implements IProduit{
@@ -54,7 +49,6 @@ public class Produit extends UnicastRemoteObject implements IProduit{
 		
 	}
 	
-
 	public int getId() throws RemoteException{
 		return id;
 	}

@@ -8,7 +8,7 @@ import dao.ClientDao;
 import interfaces.IClient;
 
 public class Client extends UnicastRemoteObject implements IClient{
-
+	
 	private static final long serialVersionUID = 1L;
 	
 	int id;
@@ -43,17 +43,21 @@ public class Client extends UnicastRemoteObject implements IClient{
 		this.idPanier = idPanier;
 	}
 	
-	public Client connexionClient() throws RemoteException, SQLException
-	{
-		return clientDao.connexionClient(mail, mdp);
-	}
-	
+	/**
+	 * Permet de récupérer un client 
+	 * @return
+	 * @throws RemoteException
+	 * @throws SQLException
+	 */
 	public Client connexionClient(String mail, String mdp) throws RemoteException, SQLException
 	{
 		return clientDao.connexionClient(mail, mdp);
 	}
 	
-	public Panier recuperePanier() throws RemoteException, SQLException
+	/**
+	 * Permet de récupérer le Panier d'un client
+	 */
+	public Panier recupererPanier() throws RemoteException, SQLException
 	{
 		return clientDao.recupererPanier(this.id);
 	}
@@ -61,54 +65,71 @@ public class Client extends UnicastRemoteObject implements IClient{
 	public int getId() throws RemoteException {
 		return id;
 	}
+	
 	public void setId(int id) throws RemoteException {
 		this.id = id;
 	}
+	
 	public String getNom() {
 		return nom;
 	}
+	
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+	
 	public String getPrenom() {
 		return prenom;
 	}
+	
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
+	
 	public String getRue() {
 		return rue;
 	}
+	
 	public void setRue(String rue) {
 		this.rue = rue;
 	}
+	
 	public int getCp() {
 		return cp;
 	}
+	
 	public void setCp(int cp) {
 		this.cp = cp;
 	}
+	
 	public int getNumRue() {
 		return numRue;
 	}
+	
 	public void setNumRue(int numRue) {
 		this.numRue = numRue;
 	}
+	
 	public int getAge() {
 		return age;
 	}
+	
 	public void setAge(int age) {
 		this.age = age;
 	}
+	
 	public String getMail() {
 		return mail;
 	}
+	
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+	
 	public String getMdp() {
 		return mdp;
 	}
+	
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}

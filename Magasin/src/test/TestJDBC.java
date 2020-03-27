@@ -28,8 +28,21 @@ public class TestJDBC {
 		MagasinDao magasinDao = new MagasinDao();
 		ClientDao clientdao = new ClientDao();
 		
+		ArrayList<Integer> listInt = new ArrayList<Integer>();
+		listInt = panier.getQuantiteProduit();
+		panier.ajouterProduit(3);
+		panier.ajouterProduit(3);
+		panier.ajouterProduit(3);
+		panier.ajouterProduit(3);
+		panier.retirerProduit(2);
+		panier.retirerProduit(3);
+		listInt = panier.getQuantiteProduit();
+		for ( Integer in : listInt)
+		{
+			
+			System.out.println(in);
+		}
 		
-		System.out.println(panier.getMontantPanier());
 		
 		/**
 		 * METHODE DE CONNEXION 

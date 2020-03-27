@@ -26,7 +26,13 @@ public class MagasinDao {
 
 	}
 
-	public ArrayList<Produit> getProduits() throws RemoteException, SQLException {
+	/**
+	 * Récupère les produits d'un magasin
+	 * @return
+	 * @throws RemoteException
+	 * @throws SQLException
+	 */
+	public ArrayList<Produit> recupererProduits() throws RemoteException, SQLException {
 		ArrayList<Produit> listeProduits = new ArrayList<Produit>();
 		Connection c = MysqlDbConnection.getConnection();
 		Statement stmt = null;
@@ -44,8 +50,8 @@ public class MagasinDao {
 		stmt.close();
 		c.close();
 		return listeProduits;
-		
 	}
+	
 	public Produit read(Produit produit) {
 		// TODO Auto-generated method stub
 		return null;

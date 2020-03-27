@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MysqlDbConnection {
+	
 	private static final String JDBC_URL = "jdbc:mysql://localhost:3306/lpglprojetrmi?serverTimezone=UTC";
 	private static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
 	
