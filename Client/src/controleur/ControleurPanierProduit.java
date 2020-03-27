@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
 public class ControleurPanierProduit implements Initializable{
@@ -27,6 +28,9 @@ public class ControleurPanierProduit implements Initializable{
 	
 	@FXML
 	private Label label_nomproduit;
+	
+	@FXML
+	private TextField tf_quantite;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -70,6 +74,7 @@ public class ControleurPanierProduit implements Initializable{
 	 */
 	public void chargerProduitCourant() throws RemoteException {
 		label_nomproduit.setText(produitCourant.getNom());
+		
 	}
 	
 }

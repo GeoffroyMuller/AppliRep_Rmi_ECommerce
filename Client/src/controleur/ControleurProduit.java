@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Alert.AlertType;
 
-public class ControleurMagasinProduit implements Initializable{
+public class ControleurProduit implements Initializable{
 	
 	private IMagasin magasin;
 	
@@ -30,14 +30,18 @@ public class ControleurMagasinProduit implements Initializable{
 	
 	@FXML
 	private Label label_nomproduit;
+	
+	@FXML
+	private Label label_description;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		magasin = ClientApp.getMagasinCourant();
 		try {
+			System.out.println("------------"+ClientApp.getSessionClientCourant().getId());
 			panier = ClientApp.getSessionClientCourant().recuperePanier();
 		} catch (RemoteException | SQLException e1) {
-			e1.printStackTrace();
+			System.out.println("--******************-");
 		}
 		
 		try {
@@ -65,6 +69,7 @@ public class ControleurMagasinProduit implements Initializable{
 	 */
 	public void chargerProduitCourant() throws RemoteException {
 		label_nomproduit.setText(produitCourant.getNom());
+		label_description.setText(produitCourant.getDescription());
 	}
 	
 	/**

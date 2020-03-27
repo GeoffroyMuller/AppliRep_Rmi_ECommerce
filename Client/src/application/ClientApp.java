@@ -19,21 +19,21 @@ import interfaces.IProduit;
  * @author Geoff-Portable
  */
 public class ClientApp {
-	
+
 	/**
 	 * Magasin courant
 	 */
 	private static IMagasin magasinCourant;
-	
+
 	/**
 	 * Magasin courante
 	 */
 	private static IClient sessionClientCourant;
-	
+
 	private static ClientApp clientApp;
-	
+
 	private static ArrayList<IClient> listeSessionClient;
-	
+
 	private static ArrayList<IMagasin> listeMagasins;
 
 	/**
@@ -46,7 +46,7 @@ public class ClientApp {
 		}
 		return clientApp;
 	}
-	
+
 	/**
 	 * Permet de connecter le clientApp au magasin
 	 * @param ip du serveur
@@ -63,7 +63,7 @@ public class ClientApp {
 		listeMagasins = new ArrayList<IMagasin>();
 		listeMagasins.add(obj);
 	}
-	
+
 	/**
 	 * Permet de connecter le clientApp a la sessionClient (representation du client sur le serveur)
 	 * @param ip du serveur
@@ -77,11 +77,11 @@ public class ClientApp {
 			throws MalformedURLException, RemoteException, NotBoundException, SQLException {
 		IClient obj;
 		obj = (IClient)Naming.lookup("rmi://"+ip+":"+port+"/client");
-		sessionClientCourant = obj;
+		sessionClientCourant = obj.connexionClient("geo@gmail.com", "geo");
 		listeSessionClient = new ArrayList<IClient>();
-		listeSessionClient.add(obj.connexionClient("geo@gmail.com", "geo"));
+		listeSessionClient.add(sessionClientCourant);
 	}
-	
+
 	public static IMagasin getMagasinCourant() {
 		return magasinCourant;
 	}
@@ -93,7 +93,7 @@ public class ClientApp {
 	public static ArrayList<IMagasin> getListeMagasins() {
 		return listeMagasins;
 	}
-	
+
 	public static ArrayList<IClient> getListeSessionClient() {
 		return listeSessionClient;
 	}
