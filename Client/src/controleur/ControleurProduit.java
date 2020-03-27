@@ -10,6 +10,8 @@ import application.ClientApp;
 import interfaces.IMagasin;
 import interfaces.IPanier;
 import interfaces.IProduit;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -24,9 +26,29 @@ public class ControleurProduit implements Initializable{
 	private IPanier panier;
 	
 	/**
+	 * Id representant l'emplacement du produit du magasin
+	 */
+	private int idPlacement;
+	
+	/**
 	 * Produit courant
 	 */
 	private IProduit produitCourant;
+	
+	/**
+	 * Liste des produits présent dans le magasin
+	 */
+	private ArrayList<IProduit> listeProduits;
+
+	/**
+	 * Quantité du produit dans le panier
+	 */
+	private int qtProduit;
+	
+	/**
+	 * Liste des quantités de chaque produit du panier
+	 */
+	private ArrayList<Integer> listeQuantites;
 	
 	@FXML
 	private Label label_nomproduit;
@@ -38,15 +60,22 @@ public class ControleurProduit implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		magasin = ClientApp.getMagasinCourant();
 		try {
-			System.out.println("------------"+ClientApp.getSessionClientCourant().getId());
+			panier = ClientApp.getSessionClientCourant().recuperePanier();
+		} catch (RemoteException | SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		idPlacement = ControleurMagasin.getNoProduitPanierCourant();
+		actualiserQuantite();
+		try {
 			panier = ClientApp.getSessionClientCourant().recuperePanier();
 		} catch (RemoteException | SQLException e1) {
-			System.out.println("--******************-");
+			e1.printStackTrace();
 		}
 		
 		try {
 			ArrayList<IProduit> listeProduits = magasin.getListeProduit();
-			produitCourant = listeProduits.get(ControleurMagasin.getNoProduitCourant());
+			produitCourant = listeProduits.get(idPlacement);
 			chargerProduitCourant();
 		} catch (RemoteException e) {
 			alertErreur_Charge();
@@ -56,8 +85,10 @@ public class ControleurProduit implements Initializable{
 	@FXML
 	public void ajouterAuPanier() {
 		try {
+			actualiserQuantite();
 			System.out.println("-----------------"+produitCourant.getId());
 			panier.ajouterProduit(produitCourant.getId());
+			actualiserQuantite();
 		} catch (RemoteException | SQLException e) {
 			e.printStackTrace();
 		}
@@ -83,5 +114,16 @@ public class ControleurProduit implements Initializable{
 		alert.showAndWait();
 	}
 	
-	
+	/**
+	 * Actualise les attribus de quantité
+	 */
+	private void actualiserQuantite() {
+		try {
+			listeQuantites = panier.getQuantiteProduit();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		qtProduit = listeQuantites.get(idPlacement);
+	}
+
 }

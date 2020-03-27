@@ -22,16 +22,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class ControleurMagasin implements Initializable{
-	
+
 	private IMagasin magasin;
 
 	private IClient sessionClient;
-	
+
 	/**
 	 * Numero du produit qui est en train d'étre chargé
 	 */
 	private static int noProduitCourant;
-	
+
 	/**
 	 * Numero du produit du panier qui est en train d'étre chargé
 	 */
@@ -39,7 +39,7 @@ public class ControleurMagasin implements Initializable{
 
 	@FXML
 	private ListView<BorderPane> list_produit;
-	
+
 	@FXML
 	private ListView<AnchorPane> list_panier;
 
@@ -48,14 +48,14 @@ public class ControleurMagasin implements Initializable{
 		try {
 			magasin = ClientApp.getMagasinCourant();
 			sessionClient = ClientApp.getSessionClientCourant();
-			
+
 			chargerProduit();
 			chargerPanier();
 		} catch (IOException | SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Charge les produits du magasin dans la vue
 	 * @throws IOException
@@ -73,9 +73,9 @@ public class ControleurMagasin implements Initializable{
 			nodeproduit = loader.load();
 			list_produit.getItems().add(nodeproduit);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Charge le panier du client dans la vue
 	 * @throws IOException
@@ -85,18 +85,20 @@ public class ControleurMagasin implements Initializable{
 	public void chargerPanier() throws IOException, SQLException {
 		IPanier panier = sessionClient.recuperePanier();
 		ArrayList<IProduit> listeProduits = panier.getListeDeProduit();
-		
+
 		AnchorPane nodeproduit;
 
 		for(int i=0; i<listeProduits.size(); i++) {
+
 			noProduitPanierCourant = i;
 			FXMLLoader loader = new FXMLLoader(getClass()
 					.getResource("/vue/produitPanier.fxml"));
 			nodeproduit = loader.load();
 			list_panier.getItems().add(nodeproduit);
 		}
+
 	}
-	
+
 	public static int getNoProduitCourant() {
 		return noProduitCourant;
 	}
@@ -112,8 +114,8 @@ public class ControleurMagasin implements Initializable{
 	public IClient getSessionClient() {
 		return sessionClient;
 	}
-	
-	
+
+
 
 }
 
