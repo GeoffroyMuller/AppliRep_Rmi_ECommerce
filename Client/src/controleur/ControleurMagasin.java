@@ -16,11 +16,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class ControleurMagasin implements Initializable{
+	
+	private IMagasin magasin;
+
+	private IClient sessionClient;
 	
 	/**
 	 * Numero du produit qui est en train d'étre chargé
@@ -36,11 +41,14 @@ public class ControleurMagasin implements Initializable{
 	private ListView<BorderPane> list_produit;
 	
 	@FXML
-	private ListView<BorderPane> list_panier;
+	private ListView<AnchorPane> list_panier;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
+			magasin = ClientApp.getMagasinCourant();
+			sessionClient = ClientApp.getSessionClientCourant();
+			
 			chargerProduit();
 			chargerPanier();
 		} catch (IOException | SQLException e) {
@@ -54,7 +62,7 @@ public class ControleurMagasin implements Initializable{
 	 */
 	@FXML
 	public void chargerProduit() throws IOException {
-		ArrayList<IProduit> listeProduits = ClientApp.dernierMagasin().getListeProduit();
+		ArrayList<IProduit> listeProduits = magasin.getListeProduit();
 
 		BorderPane nodeproduit;
 
@@ -75,15 +83,15 @@ public class ControleurMagasin implements Initializable{
 	 */
 	@FXML
 	public void chargerPanier() throws IOException, SQLException {
-		IPanier panier = ClientApp.getPanier();
+		IPanier panier = sessionClient.recuperePanier();
 		ArrayList<IProduit> listeProduits = panier.getListeDeProduit();
 		
-		BorderPane nodeproduit;
+		AnchorPane nodeproduit;
 
 		for(int i=0; i<listeProduits.size(); i++) {
 			noProduitPanierCourant = i;
 			FXMLLoader loader = new FXMLLoader(getClass()
-					.getResource("/vue/produit.fxml"));
+					.getResource("/vue/produitPanier.fxml"));
 			nodeproduit = loader.load();
 			list_panier.getItems().add(nodeproduit);
 		}
@@ -92,5 +100,20 @@ public class ControleurMagasin implements Initializable{
 	public static int getNoProduitCourant() {
 		return noProduitCourant;
 	}
+
+	public static int getNoProduitPanierCourant() {
+		return noProduitPanierCourant;
+	}
+
+	public IMagasin getMagasin() {
+		return magasin;
+	}
+
+	public IClient getSessionClient() {
+		return sessionClient;
+	}
+	
+	
+
 }
 

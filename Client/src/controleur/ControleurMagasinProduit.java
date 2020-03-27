@@ -2,11 +2,13 @@ package controleur;
 
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.ClientApp;
 import interfaces.IMagasin;
+import interfaces.IPanier;
 import interfaces.IProduit;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,22 +17,32 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Alert.AlertType;
 
-public class ControleurProduit implements Initializable{
+public class ControleurMagasinProduit implements Initializable{
+	
+	private IMagasin magasin;
+	
+	private IPanier panier;
 	
 	/**
 	 * Produit courant
 	 */
-	private static IProduit produit;
+	private IProduit produitCourant;
 	
 	@FXML
 	private Label label_nomproduit;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		IMagasin magasin = ClientApp.dernierMagasin();
+		magasin = ClientApp.getMagasinCourant();
 		try {
-			ArrayList<IProduit> listeProduits = ClientApp.dernierMagasin().getListeProduit();
-			produit = listeProduits.get(ControleurMagasin.getNoProduitCourant());
+			panier = ClientApp.getSessionClientCourant().recuperePanier();
+		} catch (RemoteException | SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			ArrayList<IProduit> listeProduits = magasin.getListeProduit();
+			produitCourant = listeProduits.get(ControleurMagasin.getNoProduitCourant());
 			chargerProduitCourant();
 		} catch (RemoteException e) {
 			alertErreur_Charge();
@@ -39,7 +51,12 @@ public class ControleurProduit implements Initializable{
 	
 	@FXML
 	public void ajouterAuPanier() {
-		
+		try {
+			System.out.println("-----------------"+produitCourant.getId());
+			panier.ajouterProduit(produitCourant.getId());
+		} catch (RemoteException | SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -47,7 +64,7 @@ public class ControleurProduit implements Initializable{
 	 * @throws RemoteException
 	 */
 	public void chargerProduitCourant() throws RemoteException {
-		label_nomproduit.setText(produit.getNom());
+		label_nomproduit.setText(produitCourant.getNom());
 	}
 	
 	/**

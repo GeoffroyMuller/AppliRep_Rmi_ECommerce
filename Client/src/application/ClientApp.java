@@ -19,10 +19,20 @@ import interfaces.IProduit;
  * @author Geoff-Portable
  */
 public class ClientApp {
-
+	
+	/**
+	 * Magasin courant
+	 */
+	private static IMagasin magasinCourant;
+	
+	/**
+	 * Magasin courante
+	 */
+	private static IClient sessionClientCourant;
+	
 	private static ClientApp clientApp;
 	
-	private static IClient sessionClient;
+	private static ArrayList<IClient> listeSessionClient;
 	
 	private static ArrayList<IMagasin> listeMagasins;
 
@@ -49,6 +59,7 @@ public class ClientApp {
 			throws MalformedURLException, RemoteException, NotBoundException {
 		IMagasin obj;
 		obj = (IMagasin)Naming.lookup("rmi://"+ip+":"+port+"/magasin");
+		magasinCourant = obj;
 		listeMagasins = new ArrayList<IMagasin>();
 		listeMagasins.add(obj);
 	}
@@ -66,28 +77,27 @@ public class ClientApp {
 			throws MalformedURLException, RemoteException, NotBoundException, SQLException {
 		IClient obj;
 		obj = (IClient)Naming.lookup("rmi://"+ip+":"+port+"/client");
-		sessionClient = obj.connexionClient("geo@gmail.com", "geo");
+		sessionClientCourant = obj;
+		listeSessionClient = new ArrayList<IClient>();
+		listeSessionClient.add(obj.connexionClient("geo@gmail.com", "geo"));
 	}
 	
-	public static IMagasin dernierMagasin() {
-		ArrayList<IMagasin> listeMagasins = getListeMagasins();
-		return listeMagasins.get(listeMagasins.size()-1);
+	public static IMagasin getMagasinCourant() {
+		return magasinCourant;
 	}
 
-	public static IClient getSessionClient() {
-		return sessionClient;
-	}
-	
-	public static IPanier getPanier() throws RemoteException, SQLException {
-		return sessionClient.recuperePanier();
+	public static IClient getSessionClientCourant() {
+		return sessionClientCourant;
 	}
 
 	public static ArrayList<IMagasin> getListeMagasins() {
 		return listeMagasins;
 	}
 	
-	
-	
+	public static ArrayList<IClient> getListeSessionClient() {
+		return listeSessionClient;
+	}
+
 	/**
 	 * Permet d'effectuer des test
 	 */
