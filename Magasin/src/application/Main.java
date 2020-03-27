@@ -2,22 +2,11 @@ package application;
 
 import java.net.InetAddress;
 import java.rmi.Naming;
-import java.rmi.RMISecurityManager;
 import java.rmi.registry.LocateRegistry;
-import java.rmi.server.UnicastRemoteObject;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-
 import implement.Banque;
 import implement.Client;
 import implement.Magasin;
-import implement.Panier;
-import implement.Produit;
-import include.MysqlDbConnection;
-import interfaces.IClient;
 
 public class Main {
 	
@@ -25,14 +14,10 @@ public class Main {
 	private static String IP = "127.0.0.1";
 
 	public static void main(String[] args) throws SQLException {
-		// TODO Auto-generated method stub
-		
-//		
-		System.out.println("yo");
 		try {
 			LocateRegistry.createRegistry(PORT);
 			
-			System.out.println("Hello world");
+			System.out.println("Lancement du serveur Magasin");
 			
 			Magasin magasin = new Magasin();
 			String url = "rmi://"+InetAddress.getLocalHost().getHostAddress()+":"+PORT+"/magasin";
@@ -53,7 +38,6 @@ public class Main {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			// TODO: handle exception
 		}
 	}
 }

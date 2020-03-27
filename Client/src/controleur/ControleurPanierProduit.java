@@ -61,7 +61,7 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
-			panier = ClientApp.getSessionClientCourant().recuperePanier();
+			panier = ClientApp.getSessionClientCourant().recupererPanier();
 			idPlacement = ControleurMagasin.getNoProduitPanierCourant();
 			
 			try {

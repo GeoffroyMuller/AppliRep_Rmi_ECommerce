@@ -60,7 +60,7 @@ public class ControleurProduit implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		magasin = ClientApp.getMagasinCourant();
 		try {
-			panier = ClientApp.getSessionClientCourant().recuperePanier();
+			panier = ClientApp.getSessionClientCourant().recupererPanier();
 		} catch (RemoteException | SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -68,7 +68,7 @@ public class ControleurProduit implements Initializable{
 		idPlacement = ControleurMagasin.getNoProduitPanierCourant();
 		actualiserQuantite();
 		try {
-			panier = ClientApp.getSessionClientCourant().recuperePanier();
+			panier = ClientApp.getSessionClientCourant().recupererPanier();
 		} catch (RemoteException | SQLException e1) {
 			e1.printStackTrace();
 		}

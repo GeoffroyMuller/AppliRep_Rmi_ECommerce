@@ -83,7 +83,7 @@ public class ControleurMagasin implements Initializable{
 	 */
 	@FXML
 	public void chargerPanier() throws IOException, SQLException {
-		IPanier panier = sessionClient.recuperePanier();
+		IPanier panier = sessionClient.recupererPanier();
 		ArrayList<IProduit> listeProduits = panier.getListeDeProduit();
 
 		AnchorPane nodeproduit;

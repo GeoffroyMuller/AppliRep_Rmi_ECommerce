@@ -106,7 +106,7 @@ public class ClientApp {
 		try {
 			Remote r = Naming.lookup("rmi://192.168.0.17:1098/client");
 			IClient ibanque = ((IClient)r).connexionClient("root", "root");
-			IPanier ipanier = ibanque.recuperePanier();
+			IPanier ipanier = ibanque.recupererPanier();
 			System.out.println(ipanier.calculerMontantPanier());
 			ipanier.ajouterProduit(2);
 		} catch (Exception e) {
