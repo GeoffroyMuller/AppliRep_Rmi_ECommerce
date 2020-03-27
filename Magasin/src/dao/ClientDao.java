@@ -34,7 +34,7 @@ public class ClientDao {
 		return cli;
 	}
 	
-	public Panier recupererPanier(int idClient) throws RemoteException, SQLException
+	public int recupererPanier(int idClient) throws RemoteException, SQLException
 	{
 		ArrayList<Object> listeChamps = new ArrayList<Object>();
 		Connection c = MysqlDbConnection.getConnection();
@@ -43,7 +43,7 @@ public class ClientDao {
 		stmt = c.createStatement();
 		ResultSet rs = stmt.executeQuery(sql);
 		rs.next();
-		Panier panier = new Panier(rs.getInt("idPanier"));		
+		int panier = rs.getInt("idPanier");		
 		rs.close();
 		stmt.close();
 		c.close();

@@ -104,9 +104,11 @@ public class ClientApp {
 	public static void testClient() {
 		System.out.println( "Lancement du client!" );
 		try {
-			Remote r = Naming.lookup("rmi://192.168.0.17:1099/banque");
-			boolean ibanque = ((IBanque)r).verifierSolvabilite("GEO123GEO", 20.00);
-			System.out.println(ibanque);
+			Remote r = Naming.lookup("rmi://192.168.0.17:1098/client");
+			IClient ibanque = ((IClient)r).connexionClient("root", "root");
+			IPanier ipanier = ibanque.recuperePanier();
+			System.out.println(ipanier.calculerMontantPanier());
+			ipanier.ajouterProduit(2);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
