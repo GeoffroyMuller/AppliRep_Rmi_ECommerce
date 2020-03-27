@@ -12,20 +12,14 @@
    <top>
       <Pane prefHeight="43.0" prefWidth="1190.0" style="-fx-background-color: #CDCDCD;" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="textfield_ip" layoutX="38.0" layoutY="9.0" prefHeight="25.0" prefWidth="270.0" style="-fx-background-color: white;" />
-            <Button fx:id="bt_connexion" layoutX="657.0" layoutY="6.0" mnemonicParsing="false" onAction="#connexion" prefHeight="31.0" prefWidth="79.0" text="Connexion" />
-            <Label layoutX="14.0" layoutY="9.0" text="IP" textAlignment="CENTER">
+            <TextField fx:id="textfield_ip_port" layoutX="76.0" layoutY="9.0" prefHeight="26.0" prefWidth="465.0" style="-fx-background-color: white;" />
+            <Button fx:id="bt_connexion" layoutX="567.0" layoutY="6.0" mnemonicParsing="false" onAction="#connexion" prefHeight="31.0" prefWidth="79.0" text="Connexion" />
+            <Label layoutX="14.0" layoutY="9.0" text="IP:PORT" textAlignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="333.0" layoutY="9.0" text="Port" textAlignment="CENTER">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <TextField fx:id="textfield_port" layoutX="370.0" layoutY="9.0" prefHeight="25.0" prefWidth="270.0" style="-fx-background-color: white;" />
-            <Button fx:id="bt_test" layoutX="757.0" layoutY="6.0" mnemonicParsing="false" onAction="#chargerMagasin" text="Test" />
+            <Button fx:id="bt_test" onAction="#connexion" layoutX="757.0" layoutY="6.0" mnemonicParsing="false" text="Test" />
          </children>
       </Pane>
    </top>

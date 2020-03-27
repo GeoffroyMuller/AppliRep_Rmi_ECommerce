@@ -1,6 +1,7 @@
 package controleur;
 
 import java.io.IOException;
+import java.rmi.ConnectException;
 
 import application.Client;
 import javafx.collections.ObservableList;
@@ -18,10 +19,12 @@ import javafx.scene.layout.BorderPane;
  * @author Geoff-Portable
  */
 public class Controleur {
+	/*
+	 * Convention : les variables @FXML utilisent des "_", 
+	 * les autres utilise principalement le camelcase
+	 */
 	@FXML
-	private TextField textfield_ip;
-	@FXML
-	private TextField textfield_port;
+	private TextField textfield_ip_port;
 	@FXML
 	private TabPane tab_onglets;
 	@FXML
@@ -42,25 +45,44 @@ public class Controleur {
 	 */
 	@FXML
 	public void connexion(){
-		IP = textfield_ip.getText();
-		PORT = textfield_port.getText();
+
 			try {
-				if(IP.isEmpty()||PORT.isEmpty()) {
-					throw new Exception();
-				}
+				recupereIpPort();
 				Client.connection(IP, PORT);
 				chargerMagasin();
+			} catch (ConnectException e) {
+				alertConnexionEchouee("Le serveur distant n'est pas accessible");
 			} catch (Exception e) {
-				alertErreur_IpPort();
+				e.printStackTrace();
+				alertConnexionEchouee("L'ip ou le port saisi est incorrect :"
+						+"\n  format attendu : <ip serveur>:<port serveur>"
+						+"\n  exemple : 192.168.43.1:1099");
 			}
 		
 	}
 	
 	/**
+	 * Recupere l'ip et le port entrés dans le textfield de la vue principal
+	 * @throws Exception lorsque le format <ip serveur>:<port serveur> n'est pas respecté
+	 */
+	public void recupereIpPort() throws Exception{
+		String[] ipPort = textfield_ip_port.getText().trim().split(":");
+		
+		if(ipPort.length!=2) {
+			throw new Exception();
+		}else {
+			if(ipPort[0].isEmpty()||ipPort[1].isEmpty()) {
+				throw new Exception();
+			}
+		}
+		IP = ipPort[0];
+		PORT = ipPort[1];
+	}
+	
+	/**
 	 * Charge le fxml du magasin dans un nouvel onglet
 	 */
-	@FXML
-	public void chargerMagasin() {
+	private void chargerMagasin() {
 		ObservableList<Tab> list_tabs = tab_onglets.getTabs();
 		list_tabs.add(new Tab(""+IP+" : "+PORT));
 		FXMLLoader loader = new FXMLLoader(getClass()
@@ -80,11 +102,11 @@ public class Controleur {
 	/**
 	 * affiche une alert specifique à l'ip et le port
 	 */
-	public static void alertErreur_IpPort() {
+	public static void alertConnexionEchouee(String msg) {
 		Alert alert = new Alert(AlertType.WARNING); alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Attention");
 		alert.setHeaderText("Connexion échouée");
-		alert.setContentText("L'ip ou le port saisi est incorrect");
+		alert.setContentText(msg);
 		alert.showAndWait();
 	}
 }

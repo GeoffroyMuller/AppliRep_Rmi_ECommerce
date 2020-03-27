@@ -29,7 +29,6 @@ public class ControleurProduit implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		IMagasin magasin = Client.dernierMagasin();
 		try {
-			System.out.println("---------");
 			ArrayList<IProduit> listeProduits = Client.dernierMagasin().getListeProduit();
 			produit = listeProduits.get(ControleurMagasin.getNoProduitCourant());
 			chargerProduitCourant();
@@ -43,7 +42,6 @@ public class ControleurProduit implements Initializable{
 	 * @throws RemoteException
 	 */
 	public void chargerProduitCourant() throws RemoteException {
-		System.out.println("---------"+produit.getNom());
 		label_nomproduit.setText(produit.getNom());
 	}
 	
