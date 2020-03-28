@@ -6,12 +6,10 @@ import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import application.ClientApp;
 import interfaces.IBanque;
 import interfaces.IClient;
 import interfaces.IPanier;
@@ -21,10 +19,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.AnchorPane;
 
 public class ControleurFacture implements Initializable{
 
@@ -74,6 +72,14 @@ public class ControleurFacture implements Initializable{
 		}
 	}
 	
+	/**
+	 * Constructeur
+	 * @param listeProduits
+	 * @param sessionClient
+	 * @throws RemoteException
+	 * @throws SQLException
+	 * @throws InterruptedException
+	 */
 	public ControleurFacture(ArrayList<IProduit> listeProduits, IClient sessionClient) throws RemoteException, SQLException, InterruptedException {
 		this.listeProduits = listeProduits;
 		this.sessionClient = sessionClient;
@@ -81,6 +87,10 @@ public class ControleurFacture implements Initializable{
 		this.listeQuantite = panier.getQuantiteProduit();
 	}
 	
+	/**
+	 * Charge les produits dans la facture
+	 * @throws IOException
+	 */
 	public void chargerListeProduit() throws IOException {
 		AnchorPane nodeproduit;
 
@@ -106,6 +116,11 @@ public class ControleurFacture implements Initializable{
 		}
 	}
 	
+	/**
+	 * Valide la facture
+	 * @throws RemoteException
+	 * @throws SQLException
+	 */
 	@FXML
 	public void validerLaFacture() throws RemoteException, SQLException
 	{

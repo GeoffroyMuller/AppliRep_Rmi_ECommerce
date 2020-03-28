@@ -9,6 +9,9 @@ import java.util.Observable;
 import interfaces.IPanier;
 import interfaces.IProduit;
 
+/**
+ * Wrapper du Panier
+ */
 public class Panier extends Observable{
 
 	private IPanier panier;

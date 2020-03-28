@@ -135,6 +135,9 @@ public class ControleurMagasin implements Initializable{
 		}
 	}
 
+	/**
+	 * Valide le panier et crée une facture
+	 */
 	@FXML
 	public void validerMonPanier() {
 		Stage windows = new Stage();
@@ -155,8 +158,6 @@ public class ControleurMagasin implements Initializable{
 			e.printStackTrace();
 		}
 	}
-
-
 
 	public static int getNoProduitCourant() {
 		return noProduitCourant;
