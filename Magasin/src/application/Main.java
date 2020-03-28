@@ -21,17 +21,17 @@ public class Main {
 			
 			Magasin magasin = new Magasin();
 			String url = "rmi://"+InetAddress.getLocalHost().getHostAddress()+":"+PORT+"/magasin";
-			System.out.println(url);
+			System.out.println(InetAddress.getLocalHost().getHostAddress()+":"+PORT);
 			Naming.rebind(url, magasin);
 			
 			Client client = new Client();
 			String urlClient = "rmi://"+InetAddress.getLocalHost().getHostAddress()+":"+PORT+"/client";
-			System.out.println(urlClient);
+			System.out.println(InetAddress.getLocalHost().getHostAddress()+":"+PORT);
 			Naming.rebind(urlClient, client);
 			
 			Banque banque = new Banque();
 			String urlBanque = "rmi://"+InetAddress.getLocalHost().getHostAddress()+":"+PORT+"/banque";
-			System.out.println(urlBanque);
+			System.out.println(InetAddress.getLocalHost().getHostAddress()+":"+PORT);
 			Naming.rebind(urlBanque, banque);
 			
 			System.out.println("Serveur lancé");

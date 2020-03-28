@@ -103,6 +103,17 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 	}
 	
 	/**
+	 * Vide entièrement un panier
+	 * @param idPanier
+	 * @throws SQLException
+	 * @throws RemoteException
+	 */
+	public void viderPanier(int idPanier) throws SQLException, RemoteException
+	{
+		panierDao.viderPanier(idPanier);
+	}
+	
+	/**
 	 * Calcul le montant des produits du panier
 	 */
 	public double calculerMontantPanier() throws RemoteException
