@@ -55,7 +55,6 @@ public class ControleurFacture implements Initializable{
 			label_ClientNumRue.setText(sessionClient.getNumRue()+" "+sessionClient.getRue());
 			label_ClientCpVille.setText(""+sessionClient.getCp());
 			label_ClientMail.setText(sessionClient.getMail());
-			label_DateJour.setText(LocalTime.now().toString());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,7 +82,7 @@ public class ControleurFacture implements Initializable{
 		if (result.isPresent()){
 		    System.out.println("Votre identifiant : " + result.get());
 		   
-		    boolean solvabilite = ibanque.verifierSolvabilite(result.get(), 220.00);
+		    boolean solvabilite = ibanque.verifierSolvabilite(result.get(), panier.calculerMontantPanier());
 		    System.out.println(solvabilite);
 		    if (solvabilite == true)
 		    {
