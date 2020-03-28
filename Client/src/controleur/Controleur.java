@@ -1,12 +1,17 @@
 package controleur;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.rmi.ConnectException;
+import java.util.ResourceBundle;
 
 import application.ClientApp;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Tab;
@@ -18,7 +23,7 @@ import javafx.scene.layout.BorderPane;
  * Controleur gerant la vue principal
  * @author Geoff-Portable
  */
-public class Controleur {
+public class Controleur implements Initializable{
 	/*
 	 * Convention : les variables @FXML utilisent des "_", 
 	 * les autres utilise principalement le camelcase
@@ -40,6 +45,13 @@ public class Controleur {
 	 */
 	private static String PORT = "PORT";
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		try {
+			textfield_ip_port.setText(""+InetAddress.getLocalHost().getHostAddress()+":"+"1098");
+		} catch (UnknownHostException e) { }
+	}
+	
 	/**
 	 * Connexion au serveur
 	 */
@@ -111,6 +123,8 @@ public class Controleur {
 		alert.setContentText(msg);
 		alert.showAndWait();
 	}
+
+
 }
 
 

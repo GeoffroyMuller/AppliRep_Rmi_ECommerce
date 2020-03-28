@@ -53,7 +53,9 @@ public class ControleurMagasin implements Initializable{
 
 	@FXML
 	private ListView<AnchorPane> list_panier;
-
+	
+	@FXML
+	private BorderPane bp_principal;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
@@ -136,6 +138,7 @@ public class ControleurMagasin implements Initializable{
 	@FXML
 	public void validerMonPanier() {
 		Stage windows = new Stage();
+		//bp_principal.setDisable(true);
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/facture.fxml"));
 			controleurFacture = new ControleurFacture();

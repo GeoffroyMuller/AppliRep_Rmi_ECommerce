@@ -43,6 +43,9 @@ public class ControleurPanierProduit implements Initializable, Observer{
 
 	@FXML
 	private Label label_nomproduit;
+	
+	@FXML
+	private Label label_prix;
 
 	@FXML
 	private TextField tf_quantite;
@@ -111,6 +114,7 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	public void chargerProduitCourant(){
 		try {
 			label_nomproduit.setText(produitCourant.getNom());
+			label_prix.setText(produitCourant.getPrixUnit()+" €/unit");
 			try {
 				tf_quantite.setText(""+panier.getQuantites(idPlacement));
 			} catch (IndexOutOfBoundsException e) { }
