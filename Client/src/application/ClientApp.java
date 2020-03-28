@@ -94,6 +94,9 @@ public class ClientApp {
 		return listeMagasins;
 	}
 
+	public static Panier getPanierSessionClient(IClient _client) {
+		return listePaniers.get(_client);
+	} 
 	
 	public static HashMap<IClient, Panier> getListePaniers() {
 		return listePaniers;

@@ -1,5 +1,6 @@
 package controleur;
 
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
@@ -26,10 +27,15 @@ import javafx.scene.control.Alert.AlertType;
  * Controleur de la vue produitPanier. Gére les produits contenus dans le panier
  */
 public class ControleurPanierProduit implements Initializable, Observer{
-
+	
+	private int idPlacement;
+	
 	private IClient sessionClient;
 	
 	private Panier panier;
+	
+	private ControleurMagasin controleurMagasin;
+	
 	/**
 	 * Produit courant
 	 */
@@ -41,20 +47,22 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	@FXML
 	private TextField tf_quantite;
 
+	
+	 public ControleurPanierProduit(
+			 ControleurMagasin _controleurMagasin, int _idPlacement, IProduit _produitCourant) {
+		 controleurMagasin = _controleurMagasin;
+		 idPlacement = _idPlacement;
+		 produitCourant = _produitCourant;
+
+	}
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		try {
-			sessionClient = ClientApp.getSessionClientCourant();
-			panier = ClientApp.getListePaniers().get(sessionClient);
-			panier.addObserver(this);
-			produitCourant = ClientApp.getMagasinCourant()
-					.getListeProduit().get(ControleurMagasin.getNoProduitPanierCourant());
-			
-			chargerProduitCourant();
+		sessionClient = controleurMagasin.getSessionClient();
+		panier = ClientApp.getPanierSessionClient(sessionClient);
+		panier.addObserver(this);
 
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		chargerProduitCourant();
 	}
 
 	@FXML
@@ -71,6 +79,7 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	public void plusUn() {
 		try {
 			panier.ajouterProduit(produitCourant.getId());
+
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,7 +89,15 @@ public class ControleurPanierProduit implements Initializable, Observer{
 
 	@FXML
 	public void retirerDuPanier() {
-		
+		try {
+			panier.retirerProduitEntier(produitCourant.getId());
+			System.out.println("retirer> produit "
+			+"[id:"+produitCourant.getId()+", nom: "+produitCourant.getNom()+"]"+"à l'emplacement : "+idPlacement);
+			controleurMagasin.actualiserPanierGraphique();
+			System.out.println("*-----------");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -90,12 +107,10 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	public void chargerProduitCourant(){
 		try {
 			label_nomproduit.setText(produitCourant.getNom());
-			tf_quantite.setText(""+panier.getListeQuantites()
-			.get(produitCourant.getId()-1));
+			//tf_quantite.setText(""+panier.getMapProduitQt().get(produitCourant));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override

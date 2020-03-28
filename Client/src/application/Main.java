@@ -32,7 +32,7 @@ public class Main extends Application{
 //			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/principal.fxml"));
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/facture.fxml"));
 			Parent root = loader.load();
-			Scene scene = new Scene(root,1000,600);
+			Scene scene = new Scene(root,1000,700);
 			scene.getStylesheets().add(getClass().getResource("/vue/style/principal.css").toExternalForm());
 
 
