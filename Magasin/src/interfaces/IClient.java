@@ -28,4 +28,16 @@ public interface IClient extends Remote{
 	
 	public void setId(int idClient) throws RemoteException;
 	
+	public String getNom() throws RemoteException;
+	
+	public String getPrenom() throws RemoteException;
+	
+	public int getCp() throws RemoteException;
+	
+	public int getNumRue()  throws RemoteException;
+	
+	public String getRue() throws RemoteException;
+	
+	public String getMail() throws RemoteException;
+	
 }

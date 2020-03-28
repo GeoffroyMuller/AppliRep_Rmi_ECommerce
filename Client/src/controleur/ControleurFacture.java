@@ -3,6 +3,7 @@ package controleur;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -49,7 +50,16 @@ public class ControleurFacture implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		try {
+			label_ClientNomPrenom.setText(sessionClient.getNom()+" "+sessionClient.getPrenom());
+			label_ClientNumRue.setText(sessionClient.getNumRue()+" "+sessionClient.getRue());
+			label_ClientCpVille.setText(""+sessionClient.getCp());
+			label_ClientMail.setText(sessionClient.getMail());
+			label_DateJour.setText(LocalTime.now().toString());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

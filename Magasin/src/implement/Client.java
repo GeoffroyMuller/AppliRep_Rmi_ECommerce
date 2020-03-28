@@ -70,7 +70,7 @@ public class Client extends UnicastRemoteObject implements IClient{
 		this.id = id;
 	}
 	
-	public String getNom() {
+	public String getNom() throws RemoteException {
 		return nom;
 	}
 	
@@ -78,7 +78,7 @@ public class Client extends UnicastRemoteObject implements IClient{
 		this.nom = nom;
 	}
 	
-	public String getPrenom() {
+	public String getPrenom() throws RemoteException {
 		return prenom;
 	}
 	
@@ -86,7 +86,7 @@ public class Client extends UnicastRemoteObject implements IClient{
 		this.prenom = prenom;
 	}
 	
-	public String getRue() {
+	public String getRue() throws RemoteException {
 		return rue;
 	}
 	
@@ -94,7 +94,7 @@ public class Client extends UnicastRemoteObject implements IClient{
 		this.rue = rue;
 	}
 	
-	public int getCp() {
+	public int getCp() throws RemoteException {
 		return cp;
 	}
 	
@@ -102,7 +102,7 @@ public class Client extends UnicastRemoteObject implements IClient{
 		this.cp = cp;
 	}
 	
-	public int getNumRue() {
+	public int getNumRue()  throws RemoteException{
 		return numRue;
 	}
 	
@@ -118,7 +118,7 @@ public class Client extends UnicastRemoteObject implements IClient{
 		this.age = age;
 	}
 	
-	public String getMail() {
+	public String getMail() throws RemoteException {
 		return mail;
 	}
 	
