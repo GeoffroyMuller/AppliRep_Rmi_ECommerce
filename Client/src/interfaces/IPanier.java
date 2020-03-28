@@ -14,6 +14,14 @@ public interface IPanier extends Remote {
 	
 	public void retirerToutesQuantites( int idProduit) throws SQLException, RemoteException; 
 	
+	/**
+	 * Vide entièrement un panier
+	 * @param idPanier
+	 * @throws SQLException
+	 * @throws RemoteException
+	 */
+	public void viderPanier(int idPanier) throws SQLException, RemoteException;
+	
 	public double calculerMontantPanier() throws RemoteException;
 	
 	public ArrayList<Integer> getQuantiteProduit() throws RemoteException, SQLException;

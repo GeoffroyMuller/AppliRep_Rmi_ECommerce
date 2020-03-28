@@ -108,6 +108,22 @@ public class PanierDao {
 	}
 
 	/**
+	 * Vide entièrement un panier
+	 * @param idPanier
+	 * @throws SQLException, RemoteException 
+	 */
+	public void viderPanier(int idPanier) throws SQLException, RemoteException
+	{
+		Connection c = MysqlDbConnection.getConnection();
+		Statement stmt = null;
+		String sql = "delete from constituer where constituer.idPanier = "+idPanier;
+		stmt = c.createStatement();
+		stmt.executeUpdate(sql);	
+		stmt.close();
+		c.close();
+	}
+	
+	/**
 	 * Récupère la liste de produits d'un panier
 	 * @param idPanier
 	 * @return
