@@ -1,5 +1,6 @@
 package controleur;
 
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.Naming;
 import java.rmi.Remote;
@@ -10,15 +11,19 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import application.ClientApp;
 import interfaces.IBanque;
 import interfaces.IClient;
 import interfaces.IPanier;
 import interfaces.IProduit;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
 
 public class ControleurFacture implements Initializable{
@@ -50,6 +55,9 @@ public class ControleurFacture implements Initializable{
 	
 	@FXML 
 	private Label label_Total;
+	
+	@FXML
+	private ListView<AnchorPane> list_produit;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -59,7 +67,8 @@ public class ControleurFacture implements Initializable{
 			label_ClientCpVille.setText(""+this.sessionClient.getCp());
 			label_ClientMail.setText(this.sessionClient.getMail());
 			label_Total.setText(panier.calculerMontantPanier()+"€");
-		} catch (RemoteException e) {
+			chargerListeProduit();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -70,6 +79,31 @@ public class ControleurFacture implements Initializable{
 		this.sessionClient = sessionClient;
 		this.panier = sessionClient.recupererPanier();
 		this.listeQuantite = panier.getQuantiteProduit();
+	}
+	
+	public void chargerListeProduit() throws IOException {
+		AnchorPane nodeproduit;
+
+		for (int i = 0; i < listeProduits.size(); i++) {
+			
+			double montant = listeProduits.get(i)
+					.getPrixUnit()*listeQuantite.get(i);
+			
+			FXMLLoader loader = new FXMLLoader(getClass()
+					.getResource("/vue/produitFacture.fxml"));
+			
+			ContoleurProduitFacture contoleurProduitFacture =
+					new ContoleurProduitFacture(
+							listeProduits.get(i).getNom(),
+							""+listeQuantite.get(i),
+							""+listeProduits.get(i).getPrixUnit(),
+							""+montant);
+			loader.setController(contoleurProduitFacture);
+			nodeproduit = loader.load();
+			
+			list_produit.getItems().add(nodeproduit);
+			System.out.println("-----------"+list_produit);
+		}
 	}
 	
 	@FXML

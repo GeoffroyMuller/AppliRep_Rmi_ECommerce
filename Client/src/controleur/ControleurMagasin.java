@@ -144,11 +144,12 @@ public class ControleurMagasin implements Initializable{
 			controleurFacture = new ControleurFacture(this.listeProduits, ClientApp.getSessionClientCourant());
 			loader.setController(controleurFacture);
 			Parent root = loader.load();
-			Scene scene = new Scene(root,600,700);
+			Scene scene = new Scene(root,400,600);
 			scene.getStylesheets().add(getClass().getResource("/vue/style/principal.css").toExternalForm());
 
 
 			windows.setScene(scene);
+			windows.setResizable(false);
 			windows.show();
 		} catch(Exception e) {
 			e.printStackTrace();
