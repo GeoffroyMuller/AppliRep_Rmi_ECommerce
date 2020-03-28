@@ -6,6 +6,9 @@ import java.sql.SQLException;
 
 public interface IBanque extends Remote {
 
+	/**
+	 * Verifie la solvabilité d'un client
+	 */
 	public boolean verifierSolvabilite(String identifiants, double montant) throws RemoteException, SQLException;
 	
 }
