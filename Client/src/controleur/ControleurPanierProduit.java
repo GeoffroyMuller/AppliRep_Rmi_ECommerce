@@ -47,7 +47,12 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	@FXML
 	private TextField tf_quantite;
 
-
+	/**
+	 * Constructeur
+	 * @param _controleurMagasin Controleur createur
+	 * @param _idPlacement place occupé dans le panier
+	 * @param _produitCourant produit a attitrer this
+	 */
 	public ControleurPanierProduit(
 			ControleurMagasin _controleurMagasin, int _idPlacement, IProduit _produitCourant) {
 		controleurMagasin = _controleurMagasin;
@@ -108,14 +113,15 @@ public class ControleurPanierProduit implements Initializable, Observer{
 			label_nomproduit.setText(produitCourant.getNom());
 			try {
 				tf_quantite.setText(""+panier.getQuantites(idPlacement));
-			} catch (IndexOutOfBoundsException e) {
-				System.out.println("Erreur: Quantité");
-			}
+			} catch (IndexOutOfBoundsException e) { }
 		} catch (RemoteException | SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Update par l'Observable
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		panier = (Panier)o;

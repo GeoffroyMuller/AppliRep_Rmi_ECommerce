@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="600.0" maxWidth="400.0" minHeight="600.0" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurFacture">
+<AnchorPane maxHeight="600.0" maxWidth="400.0" minHeight="600.0" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <Label layoutX="37.0" layoutY="23.0" text="MaFraiseDesBois" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="23.0" />
       <Label layoutX="317.0" layoutY="23.0" text="Facture" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="23.0" />
@@ -28,6 +28,6 @@
       <Label layoutX="247.0" layoutY="434.0" text="Total" AnchorPane.bottomAnchor="149.0" AnchorPane.rightAnchor="126.0" AnchorPane.topAnchor="434.0" />
       <Label layoutX="306.0" layoutY="434.0" prefHeight="17.0" prefWidth="54.0" text="999.00€" textAlignment="CENTER" AnchorPane.bottomAnchor="149.0" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="434.0" />
       <Label layoutX="37.0" layoutY="98.0" text="Notre mail" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="98.0" />
-      <Button layoutX="143.0" layoutY="528.0" mnemonicParsing="false" onAction="#validerLaFacture" prefHeight="25.0" prefWidth="114.0" text="Valider la facture" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="143.0" AnchorPane.topAnchor="528.0" />
+      <Button layoutX="143.0" layoutY="528.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Valider la facture" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="143.0" AnchorPane.topAnchor="528.0" />
    </children>
 </AnchorPane>

@@ -30,7 +30,6 @@ public class Main extends Application{
 	public void start(Stage windows) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/principal.fxml"));
-//			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/facture.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root,1000,700);
 			scene.getStylesheets().add(getClass().getResource("/vue/style/principal.css").toExternalForm());
@@ -38,7 +37,6 @@ public class Main extends Application{
 
 			windows.setScene(scene);
 			windows.show();
-//			ClientApp.testClient();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

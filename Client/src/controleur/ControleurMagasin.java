@@ -12,12 +12,16 @@ import interfaces.IClient;
 import interfaces.IMagasin;
 import interfaces.IPanier;
 import interfaces.IProduit;
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import modele.Panier;
 
 public class ControleurMagasin implements Initializable{
@@ -25,12 +29,14 @@ public class ControleurMagasin implements Initializable{
 	private IMagasin magasin;
 
 	private IClient sessionClient;
-	
+
 	private Panier panier;
 
 	private ArrayList<IProduit> listeProduits;
 
 	private ControleurPanierProduit controleurPanierProduit;
+	
+	private ControleurFacture controleurFacture;
 
 	/**
 	 * Numero du produit qui est en train d'étre chargé
@@ -106,6 +112,11 @@ public class ControleurMagasin implements Initializable{
 		}
 	}
 
+	/**
+	 * Actualise la partie graphique du panier
+	 * @throws IOException
+	 * @throws SQLException
+	 */
 	@FXML
 	public void actualiserPanierGraphique() throws IOException, SQLException {
 		AnchorPane nodeproduit;
@@ -123,11 +134,26 @@ public class ControleurMagasin implements Initializable{
 	}
 
 	@FXML
-	public void validerMonPanier()
-	{
-		
+	public void validerMonPanier() {
+		Stage windows = new Stage();
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/facture.fxml"));
+			controleurFacture = new ControleurFacture();
+			loader.setController(controleurPanierProduit);
+			Parent root = loader.load();
+			Scene scene = new Scene(root,600,700);
+			scene.getStylesheets().add(getClass().getResource("/vue/style/principal.css").toExternalForm());
+
+
+			windows.setScene(scene);
+			windows.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
+
+
+
 	public static int getNoProduitCourant() {
 		return noProduitCourant;
 	}
@@ -146,9 +172,7 @@ public class ControleurMagasin implements Initializable{
 
 	public ControleurPanierProduit getControleurPanierProduit() {
 		return controleurPanierProduit;
-	}
-	
-	
+	}	
 
 }
 

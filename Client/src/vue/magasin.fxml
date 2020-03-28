@@ -24,7 +24,7 @@
             <AnchorPane prefHeight="564.0" prefWidth="355.0">
                <children>
                   <ListView fx:id="list_panier" prefHeight="472.0" prefWidth="355.0" />
-                  <Button fx:id="bt_valider" onAction="#actualiserPanierGraphique" layoutX="239.0" layoutY="497.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="70.0" text="Valider" />
+                  <Button fx:id="bt_valider" onAction="#validerMonPanier" layoutX="239.0" layoutY="497.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="70.0" text="Valider" />
                </children>
             </AnchorPane>
          </children>

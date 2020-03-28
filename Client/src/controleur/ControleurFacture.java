@@ -41,6 +41,10 @@ public class ControleurFacture implements Initializable{
 		
 	}
 	
+	public ControleurFacture() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@FXML
 	public void validerLaFacture() throws RemoteException, SQLException
 	{
