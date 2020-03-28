@@ -141,7 +141,7 @@ public class ControleurMagasin implements Initializable{
 		//bp_principal.setDisable(true);
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/facture.fxml"));
-			controleurFacture = new ControleurFacture();
+			controleurFacture = new ControleurFacture(this.listeProduits, this.sessionClient);
 			loader.setController(controleurPanierProduit);
 			Parent root = loader.load();
 			Scene scene = new Scene(root,600,700);

@@ -33,6 +33,7 @@ public class Panier extends Observable{
 		setChanged();
 		notifyObservers();
 	}
+	
 	public void retirerProduit(int idProduit) throws SQLException {
 		try {
 			panier.retirerProduit(idProduit);

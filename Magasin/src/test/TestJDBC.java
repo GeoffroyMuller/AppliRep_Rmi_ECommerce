@@ -19,6 +19,10 @@ import implement.Produit;
 import include.MysqlDbConnection;
 import interfaces.IBanque;
 
+/**
+ * Une classe qui permet d'effectuer des tests sur la bdd
+ *
+ */
 public class TestJDBC {
 	public static void main(String[] args) throws SQLException, RemoteException {
 		ArrayList<Produit> listeP = new ArrayList<Produit>();

@@ -3,10 +3,14 @@ package controleur;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import interfaces.IBanque;
+import interfaces.IClient;
+import interfaces.IPanier;
+import interfaces.IProduit;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -16,6 +20,14 @@ import javafx.scene.control.TextInputDialog;
 
 public class ControleurFacture implements Initializable{
 
+	ArrayList<IProduit> listeProduits;
+	
+	ArrayList<Integer> listeQuantite;
+	
+	IClient sessionClient;
+	
+	IPanier panier;
+	
 	private IBanque ibanque;
 	@FXML
 	private Label label_ClientNomPrenom;
@@ -41,8 +53,11 @@ public class ControleurFacture implements Initializable{
 		
 	}
 	
-	public ControleurFacture() {
-		// TODO Auto-generated constructor stub
+	public ControleurFacture(ArrayList<IProduit> listeProduits, IClient sessionClient) throws RemoteException, SQLException {
+		this.listeProduits = listeProduits;
+		this.sessionClient = sessionClient;
+		this.panier = sessionClient.recupererPanier();
+		this.listeQuantite = panier.getQuantiteProduit();
 	}
 	
 	@FXML

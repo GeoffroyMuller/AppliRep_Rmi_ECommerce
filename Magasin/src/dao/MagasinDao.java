@@ -11,21 +11,6 @@ import implement.Produit;
 import include.MysqlDbConnection;
 
 public class MagasinDao {
-	public void create(Produit produit) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void update(Produit produit) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void delete(Produit produit) {
-		// TODO Auto-generated method stub
-
-	}
-
 	/**
 	 * Récupère les produits d'un magasin
 	 * @return
@@ -50,10 +35,5 @@ public class MagasinDao {
 		stmt.close();
 		c.close();
 		return listeProduits;
-	}
-	
-	public Produit read(Produit produit) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

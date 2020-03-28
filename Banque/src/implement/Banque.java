@@ -18,6 +18,9 @@ public class Banque extends UnicastRemoteObject implements IBanque{
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * Verifie la solvabilité d'un client
+	 */
 	public boolean verifierSolvabilite(String identifiants, double montant) throws RemoteException, SQLException
 	{
 		double solve = 0;

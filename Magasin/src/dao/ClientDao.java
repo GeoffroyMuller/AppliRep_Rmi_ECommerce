@@ -57,25 +57,5 @@ public class ClientDao {
 		c.close();
 		return panier;
 	}
-	
-	public void create(Client client) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void update(Client client) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void delete(Client client) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public Client read() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
 
