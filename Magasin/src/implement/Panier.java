@@ -129,17 +129,13 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 		this.montantPanier = montantPanier;
 	}
 
-	public ArrayList<Integer> getQuantiteProduit() throws RemoteException{
+	public ArrayList<Integer> getQuantiteProduit() throws RemoteException, SQLException{
+		this.listeQuantite = panierDao.recupererLesQuantite(this.getIdPanier());
 		return listeQuantite;
 	}
 	
-	public ArrayList<Produit> getListeDeProduit() throws RemoteException{
-		try {
-			this.listeDeProduit = panierDao.recupererLesProduits(this.getIdPanier());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public ArrayList<Produit> getListeDeProduit() throws RemoteException, SQLException{
+		this.listeDeProduit = panierDao.recupererLesProduits(this.getIdPanier());
 		return listeDeProduit;
 	}
 

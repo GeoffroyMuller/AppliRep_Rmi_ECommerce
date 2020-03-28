@@ -40,9 +40,9 @@ public interface IPanier extends Remote{
 	 */
 	public double calculerMontantPanier() throws RemoteException;
 	
-	public ArrayList<Integer> getQuantiteProduit() throws RemoteException;
+	public ArrayList<Integer> getQuantiteProduit() throws RemoteException, SQLException;
 
-	public ArrayList<Produit> getListeDeProduit() throws RemoteException;
+	public ArrayList<Produit> getListeDeProduit() throws RemoteException, SQLException;
 	
 	public int getIdPanier() throws RemoteException;
 	

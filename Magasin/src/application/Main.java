@@ -21,17 +21,17 @@ public class Main {
 			
 			Magasin magasin = new Magasin();
 			String url = "rmi://"+InetAddress.getLocalHost().getHostAddress()+":"+PORT+"/magasin";
-			System.out.println("Enregistrement de l'objet avec l'url : "+url);
+			System.out.println(url);
 			Naming.rebind(url, magasin);
 			
 			Client client = new Client();
 			String urlClient = "rmi://"+InetAddress.getLocalHost().getHostAddress()+":"+PORT+"/client";
-			System.out.println("Enregistrement de l'objet avec l'url : "+urlClient);
+			System.out.println(urlClient);
 			Naming.rebind(urlClient, client);
 			
 			Banque banque = new Banque();
 			String urlBanque = "rmi://"+InetAddress.getLocalHost().getHostAddress()+":"+PORT+"/banque";
-			System.out.println("Enregistrement de l'objet avec l'url : "+urlBanque);
+			System.out.println(urlBanque);
 			Naming.rebind(urlBanque, banque);
 			
 			System.out.println("Serveur lancé");

@@ -13,10 +13,10 @@ public class Main{
 	public static void main(String[] args) throws SQLException {
 		try {
 			LocateRegistry.createRegistry(1099);
-			System.out.println("Serveur de la banque");
+			System.out.println("Lancement du serveur de la banque");
 			Banque banque = new Banque();
 			String urlBanque = "rmi://"+InetAddress.getLocalHost().getHostAddress()+":"+PORT+"/banque";
-			System.out.println("Enregistrement de l'objet avec l'url : "+urlBanque);
+			System.out.println(urlBanque);
 			Naming.rebind(urlBanque, banque);
 			System.out.println("Serveur lancé");
 		} catch (Exception e) {

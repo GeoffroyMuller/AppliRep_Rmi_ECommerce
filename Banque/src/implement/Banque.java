@@ -6,12 +6,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-
 import include.MysqlDbConnection;
 import interfaces.IBanque;
 
 public class Banque extends UnicastRemoteObject implements IBanque{
+
+	private static final long serialVersionUID = 1L;
 
 	public Banque() throws RemoteException {
 		super();
@@ -30,7 +30,6 @@ public class Banque extends UnicastRemoteObject implements IBanque{
 		{
 			solve = rs.getDouble("solde");
 		}
-		
 		rs.close();
 		stmt.close();
 		c.close();
@@ -43,8 +42,6 @@ public class Banque extends UnicastRemoteObject implements IBanque{
 		{
 			System.out.println("le solde n'est pas ok");
 			return false;
-		}
-			
+		}	
 	}
-
 }
