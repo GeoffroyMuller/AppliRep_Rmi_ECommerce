@@ -12,18 +12,13 @@ import interfaces.IProduit;
 public class Panier extends Observable{
 
 	private IPanier panier;
-	
-	private int idPlace;
 
 	private ArrayList<Integer> listeQuantites;
 	
 	private ArrayList<IProduit> listeProduits;
-	
-	private HashMap<IProduit, Integer> mapProduitQt;
 
 	public Panier(IPanier _panier) throws RemoteException, SQLException {
 		panier = _panier;
-		mapProduitQt = new HashMap<IProduit, Integer>();
 		actualiserListePanier();
 	}
 
@@ -65,22 +60,17 @@ public class Panier extends Observable{
 		try {
 			listeProduits = panier.getListeDeProduit();
 			listeQuantites = panier.getQuantiteProduit();
-			for (int i = 0; i < listeProduits.size(); i++) {
-				mapProduitQt.put(
-						listeProduits.get(i),
-						listeQuantites.get(i));
-				System.out.println("------------"+listeQuantites.get(i));
-			}
-			for (int i = 0; i < listeProduits.size(); i++) {
-				System.out.println("list : "+listeProduits.get(i).getNom());
-			}
-
 		} catch (RemoteException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	public int getQuantites(int index) throws SQLException, RemoteException {
+		actualiserListePanier();
+		return listeQuantites.get(index); //listeQuantites.get(index);
+	}
+	
 	public ArrayList<Integer> getListeQuantites() throws SQLException {
 		actualiserListePanier();
 		return listeQuantites;
@@ -91,8 +81,4 @@ public class Panier extends Observable{
 		return listeProduits;
 	}
 
-	public HashMap<IProduit, Integer> getMapProduitQt() throws SQLException {
-		actualiserListePanier();
-		return mapProduitQt;
-	}
 }

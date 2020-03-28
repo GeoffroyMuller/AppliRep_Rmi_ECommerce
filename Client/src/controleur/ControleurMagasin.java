@@ -111,9 +111,7 @@ public class ControleurMagasin implements Initializable{
 		AnchorPane nodeproduit;
 		ArrayList<IProduit>listeProduitsPanier = panier.getListeProduits();
 		list_panier.getItems().clear();
-		System.out.println("------------1-----------------");
 		for(int i=0; i<listeProduitsPanier.size(); i++) {
-			System.out.println("*----------------");
 			FXMLLoader loader = new FXMLLoader(getClass()
 					.getResource("/vue/produitPanier.fxml"));
 			controleurPanierProduit = new ControleurPanierProduit(this, i,listeProduitsPanier.get(i));
