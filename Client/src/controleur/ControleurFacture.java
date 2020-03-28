@@ -41,6 +41,7 @@ public class ControleurFacture implements Initializable{
 		
 	}
 	
+	@FXML
 	public void validerLaFacture() throws RemoteException, SQLException
 	{
 		TextInputDialog dialog = new TextInputDialog("");
