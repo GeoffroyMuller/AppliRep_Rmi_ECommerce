@@ -77,7 +77,7 @@ public class ClientApp {
 			throws MalformedURLException, RemoteException, NotBoundException, SQLException {
 		IClient obj;
 		obj = (IClient)Naming.lookup("rmi://"+ip+":"+port+"/client");
-		sessionClientCourant = obj.connexionClient("geo@gmail.com", "geo");
+		sessionClientCourant = obj.connexionClient("geoff@gmail.com", "geoff");
 		listePaniers = new HashMap<IClient, Panier>();
 		listePaniers.put( sessionClientCourant, new Panier(sessionClientCourant.recupererPanier()));
 	}

@@ -62,11 +62,22 @@ public class ControleurFacture implements Initializable{
 		
 	}
 	
-	public ControleurFacture(ArrayList<IProduit> listeProduits, IClient sessionClient) throws RemoteException, SQLException {
+	public ControleurFacture(ArrayList<IProduit> listeProduits, IClient sessionClient) throws RemoteException, SQLException, InterruptedException {
 		this.listeProduits = listeProduits;
 		this.sessionClient = sessionClient;
 		this.panier = sessionClient.recupererPanier();
 		this.listeQuantite = panier.getQuantiteProduit();
+		Thread.sleep(2000);
+		try {
+			System.out.println(this.sessionClient.getNom());System.out.println(this.sessionClient.getPrenom());
+			label_ClientNomPrenom.setText(this.sessionClient.getNom()+" "+this.sessionClient.getPrenom());
+			label_ClientNumRue.setText(this.sessionClient.getNumRue()+" "+this.sessionClient.getRue());
+			label_ClientCpVille.setText(""+this.sessionClient.getCp());
+			label_ClientMail.setText(this.sessionClient.getMail());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
