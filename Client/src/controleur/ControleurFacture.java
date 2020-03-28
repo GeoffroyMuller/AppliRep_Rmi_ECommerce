@@ -31,7 +31,7 @@ public class ControleurFacture implements Initializable{
 	
 	private IBanque ibanque;
 	@FXML
-	private Label label_ClientNomPrenom;
+	private Label label_clientNomPrenom;
 	
 	@FXML
 	private Label label_ClientNumRue;
@@ -47,14 +47,28 @@ public class ControleurFacture implements Initializable{
 	
 	@FXML 
 	private Label label_Total;
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		System.out.println(label_clientNomPrenom);
 		try {
-			label_ClientNomPrenom.setText(sessionClient.getNom()+" "+sessionClient.getPrenom());
-			label_ClientNumRue.setText(sessionClient.getNumRue()+" "+sessionClient.getRue());
-			label_ClientCpVille.setText(""+sessionClient.getCp());
-			label_ClientMail.setText(sessionClient.getMail());
+			System.out.println(this.sessionClient.getNom());
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}try {
+			System.out.println(this.sessionClient.getPrenom());
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		try {
+			label_clientNomPrenom.setText(this.sessionClient.getNom()+" "+this.sessionClient.getPrenom());
+			label_ClientNumRue.setText(this.sessionClient.getNumRue()+" "+this.sessionClient.getRue());
+			label_ClientCpVille.setText(""+this.sessionClient.getCp());
+			label_ClientMail.setText(this.sessionClient.getMail());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,16 +82,6 @@ public class ControleurFacture implements Initializable{
 		this.panier = sessionClient.recupererPanier();
 		this.listeQuantite = panier.getQuantiteProduit();
 		Thread.sleep(2000);
-		try {
-			System.out.println(this.sessionClient.getNom());System.out.println(this.sessionClient.getPrenom());
-			label_ClientNomPrenom.setText(this.sessionClient.getNom()+" "+this.sessionClient.getPrenom());
-			label_ClientNumRue.setText(this.sessionClient.getNumRue()+" "+this.sessionClient.getRue());
-			label_ClientCpVille.setText(""+this.sessionClient.getCp());
-			label_ClientMail.setText(this.sessionClient.getMail());
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	@FXML
@@ -98,8 +102,8 @@ public class ControleurFacture implements Initializable{
 		    if (solvabilite == true)
 		    {
 		    	Alert alert = new Alert(AlertType.NONE);
-		    	alert.setTitle("Félicitation");
-		    	alert.setContentText("Votre paiement est accepté !");
+		    	alert.setTitle("Fï¿½licitation");
+		    	alert.setContentText("Votre paiement est acceptï¿½ !");
 
 		    	alert.showAndWait();
 		    }
@@ -107,7 +111,7 @@ public class ControleurFacture implements Initializable{
 		    {
 		    	Alert alert = new Alert(AlertType.WARNING);
 		    	alert.setTitle("Erreur");
-		    	alert.setContentText("Votre banque a refusé le paiement");
+		    	alert.setContentText("Votre banque a refusï¿½ le paiement");
 
 		    	alert.showAndWait();
 		    }
