@@ -100,10 +100,11 @@ public class ControleurFacture implements Initializable{
 		    System.out.println(solvabilite);
 		    if (solvabilite == true)
 		    {
+		    	panier.viderPanier(panier.getIdPanier());
 		    	Alert alert = new Alert(AlertType.INFORMATION);
 		    	alert.setTitle("Félicitation");
 		    	alert.setContentText("Votre paiement est accepté !");
-
+		    	
 		    	alert.showAndWait();
 		    }
 		    else
