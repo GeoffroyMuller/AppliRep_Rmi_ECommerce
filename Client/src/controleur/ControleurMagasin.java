@@ -107,7 +107,7 @@ public class ControleurMagasin implements Initializable{
 	}
 
 	@FXML
-	public void actualiserPanierGraphique() throws IOException {
+	public void actualiserPanierGraphique() throws IOException, SQLException {
 		AnchorPane nodeproduit;
 		ArrayList<IProduit>listeProduitsPanier = panier.getListeProduits();
 		list_panier.getItems().clear();

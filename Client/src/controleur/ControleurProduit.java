@@ -3,6 +3,7 @@ package controleur;
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -74,7 +75,7 @@ public class ControleurProduit implements Initializable, Observer{
 	}
 
 	@FXML
-	public void ajouterAuPanier() {
+	public void ajouterAuPanier() throws SQLException {
 		try {
 			panier.ajouterProduit(produitCourant.getId());
 			controleurMagasin.actualiserPanierGraphique();

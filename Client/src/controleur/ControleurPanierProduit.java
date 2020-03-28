@@ -66,7 +66,7 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	}
 
 	@FXML
-	public void moinsUn() {
+	public void moinsUn() throws SQLException {
 		try {
 			panier.retirerProduit(produitCourant.getId());
 		} catch (RemoteException e) {
@@ -76,7 +76,7 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	}
 
 	@FXML
-	public void plusUn() {
+	public void plusUn() throws SQLException {
 		try {
 			panier.ajouterProduit(produitCourant.getId());
 
@@ -88,7 +88,7 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	}
 
 	@FXML
-	public void retirerDuPanier() {
+	public void retirerDuPanier() throws SQLException {
 		try {
 			panier.retirerProduitEntier(produitCourant.getId());
 			System.out.println("retirer> produit "
