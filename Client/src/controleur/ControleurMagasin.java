@@ -124,6 +124,12 @@ public class ControleurMagasin implements Initializable{
 		}
 	}
 
+	@FXML
+	public void validerMonPanier()
+	{
+		
+	}
+	
 	public static int getNoProduitCourant() {
 		return noProduitCourant;
 	}
