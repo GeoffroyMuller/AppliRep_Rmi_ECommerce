@@ -29,7 +29,8 @@ public class Main extends Application{
 	@Override
 	public void start(Stage windows) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/principal.fxml"));
+//			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/principal.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/vue/facture.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root,1000,600);
 			scene.getStylesheets().add(getClass().getResource("/vue/style/principal.css").toExternalForm());

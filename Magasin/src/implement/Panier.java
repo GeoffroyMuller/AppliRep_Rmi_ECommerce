@@ -34,6 +34,9 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 		this.montantPanier = this.calculerMontantPanier();
 	}	
 	
+	/**
+	 * Ajoute un produit au panier
+	 */
 	public void ajouterProduit(int idProduit) throws RemoteException, SQLException
 	{
 		int idProduitExistant = 0;
@@ -62,6 +65,9 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 		}
 	}
 	
+	/**
+	 * Retire un produit au panier
+	 */
 	public void retirerProduit(int idProduit) throws RemoteException, SQLException
 	{
 		int quantite = 0;
@@ -88,11 +94,17 @@ public class Panier extends UnicastRemoteObject implements IPanier {
 		}
 	}
 	
+	/**
+	 * Retire toutes les quantites d'un produit dans le panier
+	 */
 	public void retirerToutesQuantites( int idProduit) throws SQLException, RemoteException 
 	{
 		panierDao.retirerToutesQuantites(this.idPanier, idProduit);
 	}
 	
+	/**
+	 * Calcul le montant des produits du panier
+	 */
 	public double calculerMontantPanier() throws RemoteException
 	{
 		double montantPanier = 0;

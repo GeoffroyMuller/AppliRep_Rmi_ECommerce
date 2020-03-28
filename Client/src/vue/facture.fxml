@@ -5,28 +5,29 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="600.0" maxWidth="400.0" minHeight="600.0" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ControleurFacture">
    <children>
-      <Label layoutX="37.0" layoutY="23.0" text="MaFraiseDesBois" />
-      <Label layoutX="317.0" layoutY="23.0" text="Facture" />
-      <Label layoutX="37.0" layoutY="64.0" text="Notre Num + Rue" />
-      <Label layoutX="37.0" layoutY="81.0" text="Notre Cp + Ville" />
-      <Label layoutX="247.0" layoutY="64.0" text="Destinataire : " />
-      <Label layoutX="247.0" layoutY="81.0" text="Client Nom" />
-      <Label layoutX="247.0" layoutY="98.0" text="Client Num + Rue" />
-      <Label layoutX="247.0" layoutY="115.0" text="Client Cp + Ville" />
-      <Label layoutX="247.0" layoutY="132.0" text="Client mail" />
-      <Label layoutX="37.0" layoutY="176.0" text="Date du jour" />
-      <TableView layoutX="23.0" layoutY="207.0" prefHeight="200.0" prefWidth="362.0">
+      <Label layoutX="37.0" layoutY="23.0" text="MaFraiseDesBois" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="23.0" />
+      <Label layoutX="317.0" layoutY="23.0" text="Facture" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="23.0" />
+      <Label layoutX="37.0" layoutY="64.0" text="Notre Num + Rue" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="64.0" />
+      <Label layoutX="39.0" layoutY="81.0" text="Notre Cp + Ville" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="81.0" />
+      <Label layoutX="247.0" layoutY="64.0" text="Destinataire : " AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="64.0" />
+      <Label layoutX="245.0" layoutY="81.0" text="Client Nom" AnchorPane.rightAnchor="93.0" AnchorPane.topAnchor="81.0" />
+      <Label layoutX="247.0" layoutY="98.0" text="Client Num + Rue" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="98.0" />
+      <Label layoutX="252.0" layoutY="115.0" text="Client Cp + Ville" AnchorPane.rightAnchor="67.0" AnchorPane.topAnchor="115.0" />
+      <Label layoutX="247.0" layoutY="132.0" text="Client mail" AnchorPane.rightAnchor="97.0" AnchorPane.topAnchor="132.0" />
+      <Label layoutX="37.0" layoutY="176.0" text="Date du jour" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="176.0" />
+      <TableView layoutX="16.0" layoutY="207.0" prefHeight="200.0" prefWidth="369.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="207.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Description" />
-          <TableColumn prefWidth="83.0" text="Quantités" />
-          <TableColumn prefWidth="103.0" text="Prix unitaire" />
-          <TableColumn prefWidth="100.0" text="Total" />
+          <TableColumn prefWidth="145.0" text="Description" />
+          <TableColumn prefWidth="63.0" text="Quantités" />
+          <TableColumn prefWidth="90.0" text="Prix unitaire" />
+          <TableColumn prefWidth="70.0" text="Total" />
         </columns>
       </TableView>
-      <Label layoutX="247.0" layoutY="434.0" text="Total" />
-      <Label layoutX="311.0" layoutY="434.0" prefHeight="17.0" prefWidth="54.0" text="999.00€" textAlignment="CENTER" />
-      <Label layoutX="37.0" layoutY="98.0" text="Notre mail" />
+      <Label layoutX="247.0" layoutY="434.0" text="Total" AnchorPane.bottomAnchor="149.0" AnchorPane.rightAnchor="126.0" AnchorPane.topAnchor="434.0" />
+      <Label layoutX="306.0" layoutY="434.0" prefHeight="17.0" prefWidth="54.0" text="999.00€" textAlignment="CENTER" AnchorPane.bottomAnchor="149.0" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="434.0" />
+      <Label layoutX="37.0" layoutY="98.0" text="Notre mail" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="98.0" />
+      <Button layoutX="143.0" layoutY="528.0" mnemonicParsing="false" onAction="#validerLaFacture" prefHeight="25.0" prefWidth="114.0" text="Valider la facture" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="143.0" AnchorPane.topAnchor="528.0" />
    </children>
 </AnchorPane>
