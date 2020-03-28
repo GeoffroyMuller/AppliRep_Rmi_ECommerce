@@ -75,13 +75,13 @@ public class ControleurFacture {
 		if (result.isPresent()){
 		    System.out.println("Votre identifiant : " + result.get());
 		   
-		    boolean solvabilite = ibanque.verifierSolvabilite(result.get(), 220.00);
+		    boolean solvabilite = ibanque.verifierSolvabilite(result.get(), panier.calculerMontantPanier());
 		    System.out.println(solvabilite);
 		    if (solvabilite == true)
 		    {
 		    	Alert alert = new Alert(AlertType.NONE);
-		    	alert.setTitle("Félicitation");
-		    	alert.setContentText("Votre paiement est accepté !");
+		    	alert.setTitle("Fï¿½licitation");
+		    	alert.setContentText("Votre paiement est acceptï¿½ !");
 
 		    	alert.showAndWait();
 		    }
@@ -89,7 +89,7 @@ public class ControleurFacture {
 		    {
 		    	Alert alert = new Alert(AlertType.WARNING);
 		    	alert.setTitle("Erreur");
-		    	alert.setContentText("Votre banque a refusé le paiement");
+		    	alert.setContentText("Votre banque a refusï¿½ le paiement");
 
 		    	alert.showAndWait();
 		    }
