@@ -30,11 +30,6 @@ public class ControleurProduit implements Initializable, Observer{
 	private ControleurMagasin controleurMagasin;
 
 	/**
-	 * Id representant l'emplacement du produit du magasin
-	 */
-	private int idPlacement;
-
-	/**
 	 * Produit courant
 	 */
 	private IProduit produitCourant;
@@ -46,9 +41,10 @@ public class ControleurProduit implements Initializable, Observer{
 
 	@FXML
 	private Label label_nomproduit;
-
 	@FXML
 	private Label label_description;
+	@FXML
+	private Label label_prix;
 
 	public ControleurProduit(ControleurMagasin _controleurMagasin) {
 		controleurMagasin = _controleurMagasin;
@@ -91,6 +87,7 @@ public class ControleurProduit implements Initializable, Observer{
 	public void chargerProduitCourant() throws RemoteException {
 		label_nomproduit.setText(produitCourant.getNom());
 		label_description.setText(produitCourant.getDescription());
+		label_prix.setText(""+produitCourant.getPrixUnit()+" €");
 	}
 
 	/**

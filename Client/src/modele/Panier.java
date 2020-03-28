@@ -69,13 +69,13 @@ public class Panier extends Observable{
 				mapProduitQt.put(
 						listeProduits.get(i),
 						listeQuantites.get(i));
+				System.out.println("------------"+listeQuantites.get(i));
 			}
-			System.out.println("----------------");
 			for (int i = 0; i < listeProduits.size(); i++) {
 				System.out.println("list : "+listeProduits.get(i).getNom());
 			}
 
-		} catch (RemoteException e) {
+		} catch (RemoteException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

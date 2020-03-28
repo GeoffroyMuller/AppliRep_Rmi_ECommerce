@@ -107,7 +107,7 @@ public class ControleurPanierProduit implements Initializable, Observer{
 	public void chargerProduitCourant(){
 		try {
 			label_nomproduit.setText(produitCourant.getNom());
-			//tf_quantite.setText(""+panier.getMapProduitQt().get(produitCourant));
+			tf_quantite.setText(""+panier.getMapProduitQt().get(produitCourant));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
