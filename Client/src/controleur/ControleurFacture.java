@@ -19,7 +19,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 
-public class ControleurFacture implements Initializable{
+public class ControleurFacture {
 
 	ArrayList<IProduit> listeProduits;
 	
@@ -48,26 +48,18 @@ public class ControleurFacture implements Initializable{
 	@FXML 
 	private Label label_Total;
 	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		try {
-			label_ClientNomPrenom.setText(sessionClient.getNom()+" "+sessionClient.getPrenom());
-			label_ClientNumRue.setText(sessionClient.getNumRue()+" "+sessionClient.getRue());
-			label_ClientCpVille.setText(""+sessionClient.getCp());
-			label_ClientMail.setText(sessionClient.getMail());
-			label_DateJour.setText(LocalTime.now().toString());
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	
 	public ControleurFacture(ArrayList<IProduit> listeProduits, IClient sessionClient) throws RemoteException, SQLException {
+
 		this.listeProduits = listeProduits;
 		this.sessionClient = sessionClient;
 		this.panier = sessionClient.recupererPanier();
 		this.listeQuantite = panier.getQuantiteProduit();
+
+		label_ClientNomPrenom.setText(sessionClient.getNom()+" "+sessionClient.getPrenom());
+		label_ClientNumRue.setText(sessionClient.getNumRue()+" "+sessionClient.getRue());
+		label_ClientCpVille.setText(""+sessionClient.getCp());
+		label_ClientMail.setText(sessionClient.getMail());
+		label_DateJour.setText(LocalTime.now().toString());
 	}
 	
 	@FXML
