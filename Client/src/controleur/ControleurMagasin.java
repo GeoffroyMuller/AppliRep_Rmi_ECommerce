@@ -18,8 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import modele.Panier;
 
 public class ControleurMagasin implements Initializable{
 
@@ -27,7 +26,11 @@ public class ControleurMagasin implements Initializable{
 
 	private IClient sessionClient;
 	
+	private Panier panier;
+
 	private ArrayList<IProduit> listeProduits;
+
+	private ControleurPanierProduit controleurPanierProduit;
 
 	/**
 	 * Numero du produit qui est en train d'étre chargé
@@ -51,9 +54,10 @@ public class ControleurMagasin implements Initializable{
 			magasin = ClientApp.getMagasinCourant();
 			sessionClient = ClientApp.getSessionClientCourant();
 			listeProduits = magasin.getListeProduit();
-			
+			panier = ClientApp.getPanierSessionClient(sessionClient);
 			chargerProduit();
 			chargerPanier();
+
 		} catch (IOException | SQLException e) {
 			e.printStackTrace();
 		}
@@ -70,10 +74,10 @@ public class ControleurMagasin implements Initializable{
 			noProduitCourant = i;
 			FXMLLoader loader = new FXMLLoader(getClass()
 					.getResource("/vue/produit.fxml"));
+			loader.setController(new ControleurProduit(this));
 			nodeproduit = loader.load();
 			list_produit.getItems().add(nodeproduit);
 		}
-
 	}
 
 	/**
@@ -84,7 +88,7 @@ public class ControleurMagasin implements Initializable{
 	@FXML
 	public void chargerPanier() throws IOException, SQLException {
 		IPanier panier = sessionClient.recupererPanier();
-		ArrayList<IProduit> listeProduits = panier.getListeDeProduit();
+		listeProduits = panier.getListeDeProduit();
 
 		AnchorPane nodeproduit;
 
@@ -93,10 +97,31 @@ public class ControleurMagasin implements Initializable{
 			noProduitPanierCourant = i;
 			FXMLLoader loader = new FXMLLoader(getClass()
 					.getResource("/vue/produitPanier.fxml"));
+			controleurPanierProduit = new ControleurPanierProduit(this, i,
+					ClientApp.getSessionClientCourant().recupererPanier()
+					.getListeDeProduit().get(i));
+			loader.setController(controleurPanierProduit);
 			nodeproduit = loader.load();
 			list_panier.getItems().add(nodeproduit);
 		}
+	}
 
+	@FXML
+	public void actualiserPanierGraphique() throws IOException {
+		AnchorPane nodeproduit;
+		ArrayList<IProduit>listeProduitsPanier = panier.getListeProduits();
+		list_panier.getItems().clear();
+		System.out.println("------------1-----------------");
+		for(int i=0; i<listeProduitsPanier.size(); i++) {
+			System.out.println("*----------------");
+			FXMLLoader loader = new FXMLLoader(getClass()
+					.getResource("/vue/produitPanier.fxml"));
+			controleurPanierProduit = new ControleurPanierProduit(this, i,listeProduitsPanier.get(i));
+			loader.setController(controleurPanierProduit);
+			nodeproduit = loader.load();
+			list_panier.getItems().add(nodeproduit);
+			list_panier.refresh();
+		}
 	}
 
 	public static int getNoProduitCourant() {
@@ -115,7 +140,11 @@ public class ControleurMagasin implements Initializable{
 		return sessionClient;
 	}
 
-
+	public ControleurPanierProduit getControleurPanierProduit() {
+		return controleurPanierProduit;
+	}
+	
+	
 
 }
 

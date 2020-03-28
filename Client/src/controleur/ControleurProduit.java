@@ -1,5 +1,6 @@
 package controleur;
 
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class ControleurProduit implements Initializable, Observer{
 
 	private Panier panier;
 
+	private ControleurMagasin controleurMagasin;
+
 	/**
 	 * Id representant l'emplacement du produit du magasin
 	 */
@@ -47,16 +50,21 @@ public class ControleurProduit implements Initializable, Observer{
 	@FXML
 	private Label label_description;
 
+	public ControleurProduit(ControleurMagasin _controleurMagasin) {
+		controleurMagasin = _controleurMagasin;
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
+
 			magasin = ClientApp.getMagasinCourant();
 			sessionClient = ClientApp.getSessionClientCourant();
 			listeProduits = magasin.getListeProduit();
-		
+
 			panier = ClientApp.getListePaniers().get(sessionClient);
 			panier.addObserver(this);
-			
+
 			produitCourant = listeProduits.get(ControleurMagasin.getNoProduitCourant());
 			listeProduits = magasin.getListeProduit();
 			chargerProduitCourant();
@@ -69,7 +77,8 @@ public class ControleurProduit implements Initializable, Observer{
 	public void ajouterAuPanier() {
 		try {
 			panier.ajouterProduit(produitCourant.getId());
-		} catch (RemoteException e) {
+			controleurMagasin.actualiserPanierGraphique();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
