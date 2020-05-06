@@ -1,6 +1,7 @@
 package controleur;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.URL;
 import java.rmi.Naming;
 import java.rmi.Remote;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import application.ClientApp;
 import interfaces.IBanque;
 import interfaces.IClient;
 import interfaces.IPanier;
@@ -80,10 +82,10 @@ public class ControleurFacture implements Initializable{
 	 * @throws SQLException
 	 * @throws InterruptedException
 	 */
-	public ControleurFacture(ArrayList<IProduit> listeProduits, IClient sessionClient) throws RemoteException, SQLException, InterruptedException {
-		this.listeProduits = listeProduits;
+	public ControleurFacture(IClient sessionClient) throws RemoteException, SQLException, InterruptedException {
 		this.sessionClient = sessionClient;
 		this.panier = sessionClient.recupererPanier();
+		this.listeProduits = panier.getListeDeProduit();
 		this.listeQuantite = panier.getQuantiteProduit();
 	}
 	
@@ -125,7 +127,7 @@ public class ControleurFacture implements Initializable{
 	public void validerLaFacture() throws RemoteException, SQLException
 	{
 		try {
-			Remote r = Naming.lookup("rmi://192.168.0.17:1098/banque");
+			Remote r = Naming.lookup("rmi://"+InetAddress.getLocalHost().getHostAddress()+":"+Controleur.PORT+"/banque");
 			ibanque = ((IBanque)r);
 			System.out.println(ibanque);
 		} catch (Exception e) {

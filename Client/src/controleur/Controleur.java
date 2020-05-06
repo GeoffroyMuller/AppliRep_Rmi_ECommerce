@@ -38,12 +38,12 @@ public class Controleur implements Initializable{
 	/**
 	 * ip du serveur
 	 */
-	private static String IP = "0.0.0.0";
+	public static String IP = "0.0.0.0";
 	
 	/**
 	 * port du serveur
 	 */
-	private static String PORT = "PORT";
+	public static String PORT = "PORT";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

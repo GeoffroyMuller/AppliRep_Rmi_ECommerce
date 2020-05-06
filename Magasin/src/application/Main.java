@@ -15,6 +15,10 @@ public class Main {
 
 	public static void main(String[] args) throws SQLException {
 		try {
+			if(args.length > 0) {
+				PORT = Integer.parseInt(args[0]);
+			}
+			
 			LocateRegistry.createRegistry(PORT);
 			
 			System.out.println("Lancement du serveur Magasin");

@@ -1,5 +1,6 @@
 package implement;
 
+import java.net.InetAddress;
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -27,7 +28,7 @@ public class Banque extends UnicastRemoteObject implements IBanque{
 		// TODO Auto-generated method stub
 		try {
 			System.out.println("Appel au serveur Banque");
-			Remote r = Naming.lookup("rmi://192.168.0.17/banque");
+			Remote r = Naming.lookup("rmi://"+InetAddress.getLocalHost().getHostAddress()+"/banque");
 			solvabiliteClient = ((IBanque)r).verifierSolvabilite(identifiants, montant);
 		} catch (Exception e) {
 			// TODO: handle exception
