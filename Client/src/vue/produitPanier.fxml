@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="61.0" prefWidth="259.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<AnchorPane prefHeight="61.0" prefWidth="284.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="81.0" prefWidth="420.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -17,15 +16,15 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="label_prix" layoutX="189.0" layoutY="33.0" prefHeight="20.0" prefWidth="58.0" text="9999.99€">
+            <Label fx:id="label_prix" layoutX="189.0" layoutY="33.0" prefHeight="20.0" prefWidth="234.0" text="9999.99€">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="bt_plus" onAction="#plusUn" layoutX="152.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="27.0" text="+" textFill="#188021" />
-            <Button fx:id="bt_moins" onAction="#moinsUn" layoutX="31.0" layoutY="29.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="27.0" text="-" textFill="#ee0808" />
+            <Button fx:id="bt_plus" layoutX="152.0" layoutY="30.0" mnemonicParsing="false" onAction="#plusUn" prefHeight="25.0" prefWidth="27.0" text="+" textFill="#188021" />
+            <Button fx:id="bt_moins" layoutX="31.0" layoutY="29.0" mnemonicParsing="false" onAction="#moinsUn" prefHeight="25.0" prefWidth="27.0" text="-" textFill="#ee0808" />
             <TextField fx:id="tf_quantite" layoutX="69.0" layoutY="29.0" prefHeight="25.0" prefWidth="72.0" promptText="quantité" />
-            <Button fx:id="bt_supp" onAction="#retirerDuPanier" layoutX="233.0" layoutY="2.0" mnemonicParsing="false" text="X" textFill="RED" />
+            <Button fx:id="bt_supp" layoutX="233.0" layoutY="2.0" mnemonicParsing="false" onAction="#retirerDuPanier" text="X" textFill="RED" />
          </children>
       </Pane>
    </children>
